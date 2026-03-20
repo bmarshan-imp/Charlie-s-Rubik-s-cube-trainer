@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlie's Cube Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🟩</text></svg>">
+</head>
+<body>
+
+  <!-- ==================== WELCOME SCREEN ==================== -->
+  <div id="welcome-screen" class="screen active">
+    <div class="welcome-container">
+      <div class="welcome-cube" id="welcome-cube-art"></div>
+      <h1 class="welcome-title">Charlie's Cube Trainer</h1>
+      <p class="welcome-subtitle">Learn to solve a Rubik's Cube — step by step!</p>
+
+      <div class="coach-welcome">
+        <div class="coach-avatar coach-max-avatar" title="Max Park">M</div>
+        <div class="coach-avatar coach-feliks-avatar" title="Feliks Zemdegs">F</div>
+      </div>
+      <p class="welcome-coach-text">Train with Max Park &amp; Feliks Zemdegs!</p>
+
+      <button class="btn btn-primary btn-large" id="btn-start">
+        Let's Go!
+      </button>
+      <button class="btn btn-secondary" id="btn-continue" style="display:none;">
+        Continue Where I Left Off
+      </button>
+
+      <div class="welcome-footer">
+        <button class="btn btn-text" id="btn-settings-open">Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== STAGE MAP ==================== -->
+  <div id="stage-map" class="screen">
+    <div class="stage-map-header">
+      <button class="btn btn-icon" id="btn-home" title="Home">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </button>
+      <h2 class="stage-map-title">Your Cube Journey</h2>
+      <button class="btn btn-icon" id="btn-settings-open-2" title="Settings">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </button>
+    </div>
+    <div class="stage-map-path" id="stage-map-path">
+      <!-- Filled dynamically by app.js -->
+    </div>
+  </div>
+
+  <!-- ==================== LESSON VIEW ==================== -->
+  <div id="lesson-view" class="screen">
+    <div class="lesson-header">
+      <button class="btn btn-icon" id="btn-back-to-map" title="Back to map">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="lesson-header-info">
+        <div class="lesson-stage-name" id="lesson-stage-name"></div>
+        <div class="lesson-title" id="lesson-title"></div>
+      </div>
+      <div class="step-counter" id="step-counter"></div>
+    </div>
+
+    <div class="lesson-progress-bar">
+      <div class="lesson-progress-fill" id="lesson-progress-fill"></div>
+    </div>
+
+    <!-- Coach intro (shown before steps) -->
+    <div class="coach-intro" id="coach-intro" style="display:none;">
+      <div class="coach-bubble" id="coach-intro-bubble">
+        <div class="coach-avatar" id="coach-intro-avatar"></div>
+        <div class="coach-message">
+          <div class="coach-name" id="coach-intro-name"></div>
+          <div class="coach-text" id="coach-intro-text"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="btn-coach-intro-ok">Got it!</button>
+    </div>
+
+    <!-- Step content -->
+    <div class="lesson-content" id="lesson-content">
+      <div class="step-diagram" id="step-diagram"></div>
+      <div class="step-text" id="step-text"></div>
+
+      <!-- Move badge area for algorithm steps -->
+      <div class="step-moves" id="step-moves" style="display:none;"></div>
+    </div>
+
+    <!-- Self check-in box -->
+    <div class="check-in-box" id="check-in-box" style="display:none;">
+      <div class="check-in-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4ECDC4" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="check-in-label">Check Your Cube!</div>
+      <div class="check-in-text" id="check-in-text"></div>
+    </div>
+
+    <!-- Adult check-in -->
+    <div class="adult-check-in" id="adult-check-in" style="display:none;">
+      <div class="adult-check-in-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF6B6B" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="adult-check-in-label">Adult Check-In Time!</div>
+      <div class="adult-check-in-text" id="adult-check-in-text"></div>
+      <button class="btn btn-primary" id="btn-adult-confirmed">
+        A grown-up watched me do it!
+      </button>
+    </div>
+
+    <!-- Lesson navigation -->
+    <div class="lesson-nav" id="lesson-nav">
+      <button class="btn btn-back" id="btn-prev-step">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        Back
+      </button>
+      <button class="btn btn-next" id="btn-next-step">
+        Next
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== CELEBRATION MODAL ==================== -->
+  <div id="celebration-modal" class="modal" style="display:none;">
+    <div class="modal-content celebration-content">
+      <div class="confetti-container" id="confetti-container"></div>
+      <div class="celebration-star">&#11088;</div>
+      <h2 class="celebration-title" id="celebration-title"></h2>
+      <p class="celebration-text" id="celebration-text"></p>
+      <div class="coach-bubble celebration-coach" id="celebration-coach" style="display:none;">
+        <div class="coach-avatar" id="celebration-coach-avatar"></div>
+        <div class="coach-message">
+          <div class="coach-name" id="celebration-coach-name"></div>
+          <div class="coach-text" id="celebration-coach-text"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-large" id="btn-celebration-continue">Keep Going!</button>
+    </div>
+  </div>
+
+  <!-- ==================== SETTINGS PANEL ==================== -->
+  <div id="settings-panel" class="modal" style="display:none;">
+    <div class="modal-content settings-content">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button class="btn btn-icon" id="btn-settings-close" title="Close">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="setting-group">
+        <label class="setting-label">Text Size</label>
+        <div class="size-buttons">
+          <button class="btn btn-secondary size-btn" data-size="18">Smaller</button>
+          <button class="btn btn-secondary size-btn active" data-size="20">Normal</button>
+          <button class="btn btn-secondary size-btn" data-size="24">Bigger</button>
+          <button class="btn btn-secondary size-btn" data-size="28">Biggest</button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <label class="setting-label">Progress</label>
+        <button class="btn btn-danger" id="btn-reset-progress">Start Over (Reset Everything)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

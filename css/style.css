@@ -1,0 +1,2157 @@
+/* ==========================================================================
+   Charlie's Rubik's Cube Trainer — Main Stylesheet
+   Designed for readability (OpenDyslexic, generous spacing, warm palette)
+   Target: tablet (768–1024px), scales to desktop and phone
+   ========================================================================== */
+
+/* --- Font Import --- */
+@import url('https://fonts.cdnfonts.com/css/open-dyslexic');
+
+/* --- Font size override (set by JS settings) --- */
+html {
+  font-size: var(--base-font-size, 20px);
+}
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Cube face colours */
+  --cube-white: #FFFFFF;
+  --cube-yellow: #FFD500;
+  --cube-red: #B71234;
+  --cube-orange: #FF5800;
+  --cube-blue: #0046AD;
+  --cube-green: #009B48;
+  --cube-gray: #808080;
+
+  /* Stage card colours */
+  --stage-0: #9B59B6;
+  --stage-1: #3498DB;
+  --stage-2: #2ECC71;
+  --stage-3: #E67E22;
+  --stage-4: #F1C40F;
+  --stage-5: #E74C3C;
+  --stage-6: #1ABC9C;
+  --stage-7: #8E44AD;
+
+  /* App palette */
+  --bg: #FBF5E6;
+  --text: #333333;
+  --text-light: #555555;
+  --border: #D6CDB7;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --shadow-lg: rgba(0, 0, 0, 0.14);
+
+  /* Button colours */
+  --btn-primary: #0046AD;
+  --btn-primary-hover: #003080;
+  --btn-secondary: #6B6B6B;
+  --btn-secondary-hover: #555555;
+  --btn-success: #009B48;
+  --btn-success-hover: #007A39;
+
+  /* Coach accents */
+  --coach-max: #0046AD;
+  --coach-feliks: #009B48;
+
+  /* Typography */
+  --font-family: 'OpenDyslexic', 'Comic Sans MS', Verdana, sans-serif;
+  --font-size-base: 20px;
+  --line-height: 1.8;
+  --letter-spacing: 0.05em;
+  --word-spacing: 0.12em;
+  --max-line-width: 38em;
+
+  /* Spacing scale */
+  --sp-xs: 0.4rem;
+  --sp-sm: 0.75rem;
+  --sp-md: 1.25rem;
+  --sp-lg: 2rem;
+  --sp-xl: 3rem;
+
+  /* Radius */
+  --radius: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  word-spacing: var(--word-spacing);
+  color: var(--text);
+  background-color: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--btn-primary);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+}
+
+h1 { font-size: 2rem; margin-bottom: var(--sp-md); }
+h2 { font-size: 1.55rem; margin-bottom: var(--sp-sm); }
+h3 { font-size: 1.25rem; margin-bottom: var(--sp-sm); }
+h4 { font-size: 1.1rem; margin-bottom: var(--sp-xs); }
+
+p + p {
+  margin-top: var(--sp-md);
+}
+
+/* Ensure tap targets everywhere */
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* ==========================================================================
+   1. Welcome Screen
+   ========================================================================== */
+
+#welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--sp-xl) var(--sp-lg);
+  text-align: center;
+}
+
+#welcome-screen .cube-graphic {
+  font-size: 5rem;
+  margin-bottom: var(--sp-lg);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+#welcome-screen h1 {
+  font-size: 2.4rem;
+  margin-bottom: var(--sp-sm);
+}
+
+#welcome-screen .subtitle {
+  font-size: 1.15rem;
+  color: var(--text-light);
+  max-width: var(--max-line-width);
+  margin-bottom: var(--sp-xl);
+}
+
+/* ==========================================================================
+   2. Stage Map
+   ========================================================================== */
+
+#stage-map {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--sp-lg) var(--sp-md);
+}
+
+#stage-map h2 {
+  text-align: center;
+  margin-bottom: var(--sp-lg);
+}
+
+.stage-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  list-style: none;
+}
+
+.stage-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  border: 3px solid transparent;
+  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  box-shadow: 0 3px 8px var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: var(--letter-spacing);
+  word-spacing: var(--word-spacing);
+  line-height: var(--line-height);
+  color: var(--text);
+}
+
+.stage-card:hover,
+.stage-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--shadow-lg);
+}
+
+.stage-card.current {
+  border-color: currentColor;
+  box-shadow: 0 4px 14px var(--shadow-lg);
+}
+
+.stage-card.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.stage-card.locked:hover {
+  transform: none;
+  box-shadow: 0 3px 8px var(--shadow);
+}
+
+.stage-card .stage-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+}
+
+.stage-card .stage-info {
+  flex: 1;
+}
+
+.stage-card .stage-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: block;
+}
+
+.stage-card .stage-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.stage-card .stage-status {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+}
+
+/* Stage colour assignments */
+.stage-card[data-stage="0"] .stage-icon { background: var(--stage-0); }
+.stage-card[data-stage="1"] .stage-icon { background: var(--stage-1); }
+.stage-card[data-stage="2"] .stage-icon { background: var(--stage-2); }
+.stage-card[data-stage="3"] .stage-icon { background: var(--stage-3); }
+.stage-card[data-stage="4"] .stage-icon { background: var(--stage-4); }
+.stage-card[data-stage="5"] .stage-icon { background: var(--stage-5); }
+.stage-card[data-stage="6"] .stage-icon { background: var(--stage-6); }
+.stage-card[data-stage="7"] .stage-icon { background: var(--stage-7); }
+
+.stage-card[data-stage="0"].current { border-color: var(--stage-0); }
+.stage-card[data-stage="1"].current { border-color: var(--stage-1); }
+.stage-card[data-stage="2"].current { border-color: var(--stage-2); }
+.stage-card[data-stage="3"].current { border-color: var(--stage-3); }
+.stage-card[data-stage="4"].current { border-color: var(--stage-4); }
+.stage-card[data-stage="5"].current { border-color: var(--stage-5); }
+.stage-card[data-stage="6"].current { border-color: var(--stage-6); }
+.stage-card[data-stage="7"].current { border-color: var(--stage-7); }
+
+/* ==========================================================================
+   3. Lesson View
+   ========================================================================== */
+
+#lesson-view {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Top bar --- */
+.lesson-top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  padding: var(--sp-sm) var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.lesson-top-bar .back-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--sp-xs);
+  border-radius: var(--radius);
+  color: var(--text);
+  transition: background var(--transition-fast);
+}
+
+.lesson-top-bar .back-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.lesson-top-bar .lesson-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson-top-bar .stage-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-light);
+  display: block;
+}
+
+.lesson-top-bar .lesson-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lesson-top-bar .step-counter {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+/* --- Progress bar --- */
+.progress-bar {
+  height: 6px;
+  background: var(--border);
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress-bar .progress-fill {
+  height: 100%;
+  background: var(--btn-primary);
+  border-radius: 0 3px 3px 0;
+  transition: width var(--transition-slow);
+}
+
+/* --- Lesson content --- */
+.lesson-content {
+  flex: 1;
+  padding: var(--sp-lg) var(--sp-md);
+  max-width: var(--max-line-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* --- Bottom navigation --- */
+.lesson-bottom-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-top: 2px solid var(--border);
+  padding: var(--sp-sm) var(--sp-md);
+  display: flex;
+  gap: var(--sp-sm);
+}
+
+.lesson-bottom-nav .btn {
+  flex: 1;
+  min-height: 56px;
+  font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   4. Step Content
+   ========================================================================== */
+
+.step {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+}
+
+.step .step-diagram {
+  margin-bottom: var(--sp-md);
+  display: flex;
+  justify-content: center;
+}
+
+.step .step-text {
+  max-width: var(--max-line-width);
+}
+
+.step .step-text p + p {
+  margin-top: var(--sp-sm);
+}
+
+/* ==========================================================================
+   5. Coach Bubbles
+   ========================================================================== */
+
+.coach-bubble {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--sp-lg);
+  border-left: 5px solid var(--border);
+  background: #FFFFFF;
+}
+
+.coach-bubble .coach-avatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #FFFFFF;
+}
+
+.coach-bubble .coach-message {
+  flex: 1;
+  min-width: 0;
+}
+
+.coach-bubble .coach-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: var(--sp-xs);
+  display: block;
+}
+
+/* Coach Max variant — blue */
+.coach-bubble.coach-max {
+  border-left-color: var(--coach-max);
+  background: #E8F0FE;
+}
+
+.coach-bubble.coach-max .coach-avatar {
+  background: var(--coach-max);
+}
+
+.coach-bubble.coach-max .coach-name {
+  color: var(--coach-max);
+}
+
+/* Coach Feliks variant — green */
+.coach-bubble.coach-feliks {
+  border-left-color: var(--coach-feliks);
+  background: #E6F7EE;
+}
+
+.coach-bubble.coach-feliks .coach-avatar {
+  background: var(--coach-feliks);
+}
+
+.coach-bubble.coach-feliks .coach-name {
+  color: var(--coach-feliks);
+}
+
+/* ==========================================================================
+   6. Check-in Boxes
+   ========================================================================== */
+
+/* Self check — yellow */
+.self-check {
+  border: 3px solid var(--cube-yellow);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-md) var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  background: #FFFBE6;
+}
+
+.self-check .check-heading {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: var(--sp-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+/* Adult check — orange/red */
+.adult-check {
+  border: 4px solid #E74C3C;
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  background: #FFF0ED;
+  text-align: center;
+}
+
+.adult-check .check-heading {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #C0392B;
+  margin-bottom: var(--sp-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-sm);
+}
+
+.adult-check .check-description {
+  margin-bottom: var(--sp-md);
+  color: var(--text-light);
+}
+
+.adult-check .btn-adult-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-sm);
+  min-height: 56px;
+  padding: var(--sp-sm) var(--sp-xl);
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing);
+  color: #FFFFFF;
+  background: #E74C3C;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.adult-check .btn-adult-confirm:hover {
+  background: #C0392B;
+}
+
+.adult-check .btn-adult-confirm:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   7. Move Instruction
+   ========================================================================== */
+
+.move-instruction {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  background: #EEF4FB;
+  border: 2px solid var(--btn-primary);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--sp-lg);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.move-instruction .move-arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--btn-primary);
+}
+
+.move-instruction .move-text {
+  flex: 1;
+}
+
+.move-instruction .move-notation {
+  font-size: 1.5rem;
+  color: var(--btn-primary);
+}
+
+/* ==========================================================================
+   8. Algorithm Box
+   ========================================================================== */
+
+.algorithm-box {
+  background: #FFFFFF;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  text-align: center;
+}
+
+.algorithm-box .algo-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: var(--sp-sm);
+}
+
+.algorithm-box .algo-moves {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-md);
+}
+
+.algorithm-box .algo-move {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: var(--sp-xs) var(--sp-sm);
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: var(--radius);
+  background: #F0F0F0;
+  border: 2px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.algorithm-box .algo-move.active {
+  background: #D4E8FF;
+  border-color: var(--btn-primary);
+  transform: scale(1.1);
+}
+
+.algorithm-box .algo-move.done {
+  background: #D4F5E2;
+  border-color: var(--btn-success);
+}
+
+.algorithm-box .algo-controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-sm);
+}
+
+/* ==========================================================================
+   9. Celebration Overlay
+   ========================================================================== */
+
+#celebration {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(51, 51, 51, 0.65);
+  text-align: center;
+  padding: var(--sp-lg);
+}
+
+#celebration .celebration-content {
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-xl);
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  animation: bounce 0.6s ease;
+}
+
+#celebration .celebration-emoji {
+  font-size: 4rem;
+  margin-bottom: var(--sp-md);
+}
+
+#celebration .celebration-title {
+  font-size: 2rem;
+  margin-bottom: var(--sp-sm);
+}
+
+#celebration .celebration-message {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: var(--sp-lg);
+}
+
+/* Confetti pieces */
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  top: -20px;
+  z-index: 10000;
+  animation: confetti 3s ease-in forwards;
+}
+
+.confetti-piece:nth-child(odd) {
+  border-radius: 50%;
+}
+
+.confetti-piece:nth-child(1)  { left: 10%; background: var(--cube-red);    animation-delay: 0s;    animation-duration: 2.8s; }
+.confetti-piece:nth-child(2)  { left: 20%; background: var(--cube-blue);   animation-delay: 0.15s; animation-duration: 3.2s; }
+.confetti-piece:nth-child(3)  { left: 30%; background: var(--cube-green);  animation-delay: 0.3s;  animation-duration: 2.6s; }
+.confetti-piece:nth-child(4)  { left: 40%; background: var(--cube-yellow); animation-delay: 0.1s;  animation-duration: 3.0s; }
+.confetti-piece:nth-child(5)  { left: 50%; background: var(--cube-orange); animation-delay: 0.25s; animation-duration: 2.9s; }
+.confetti-piece:nth-child(6)  { left: 60%; background: var(--stage-0);     animation-delay: 0.05s; animation-duration: 3.1s; }
+.confetti-piece:nth-child(7)  { left: 70%; background: var(--cube-red);    animation-delay: 0.35s; animation-duration: 2.7s; }
+.confetti-piece:nth-child(8)  { left: 80%; background: var(--cube-blue);   animation-delay: 0.2s;  animation-duration: 3.3s; }
+.confetti-piece:nth-child(9)  { left: 90%; background: var(--cube-green);  animation-delay: 0.4s;  animation-duration: 2.5s; }
+.confetti-piece:nth-child(10) { left: 15%; background: var(--cube-yellow); animation-delay: 0.12s; animation-duration: 3.4s; }
+.confetti-piece:nth-child(11) { left: 45%; background: var(--cube-orange); animation-delay: 0.28s; animation-duration: 2.65s;}
+.confetti-piece:nth-child(12) { left: 75%; background: var(--stage-6);     animation-delay: 0.08s; animation-duration: 3.15s;}
+
+/* ==========================================================================
+   10. Progress Bar (top of lesson)
+   ========================================================================== */
+
+/* Already defined in section 3 under .progress-bar */
+
+/* ==========================================================================
+   11. Cube Diagram Containers
+   ========================================================================== */
+
+.cube-face {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  margin: var(--sp-sm) auto;
+}
+
+.cube-face svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cube-net {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  margin: var(--sp-md) auto;
+}
+
+.cube-net svg {
+  width: 100%;
+  height: auto;
+}
+
+.cube-3d {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 260px;
+  margin: var(--sp-md) auto;
+}
+
+.cube-3d svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Sticker pulse highlight */
+.cube-face .sticker.highlight,
+.cube-net .sticker.highlight,
+.cube-3d .sticker.highlight {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   12. Settings / Navigation
+   ========================================================================== */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-sm) var(--sp-md);
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: var(--sp-xs);
+  border-radius: var(--radius);
+  color: var(--text);
+  transition: background var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-btn:hover,
+.hamburger-btn:focus-visible {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.back-to-map {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--btn-primary);
+  cursor: pointer;
+  padding: var(--sp-xs) var(--sp-sm);
+  border-radius: var(--radius);
+  transition: background var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.back-to-map:hover {
+  background: rgba(0, 70, 173, 0.08);
+}
+
+/* Side menu / drawer */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100%;
+  background: var(--bg);
+  border-right: 2px solid var(--border);
+  z-index: 500;
+  padding: var(--sp-lg) var(--sp-md);
+  transition: left var(--transition);
+  overflow-y: auto;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.side-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(51, 51, 51, 0.4);
+  z-index: 499;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+.side-menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   13. Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-sm);
+  min-height: 48px;
+  padding: var(--sp-sm) var(--sp-lg);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing);
+  word-spacing: var(--word-spacing);
+  line-height: 1.3;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--btn-primary);
+  outline-offset: 3px;
+}
+
+/* Primary — bright blue */
+.btn-primary {
+  color: #FFFFFF;
+  background: var(--btn-primary);
+  border-color: var(--btn-primary);
+}
+
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
+}
+
+/* Secondary — gray */
+.btn-secondary {
+  color: #FFFFFF;
+  background: var(--btn-secondary);
+  border-color: var(--btn-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--btn-secondary-hover);
+  border-color: var(--btn-secondary-hover);
+}
+
+/* Success — green */
+.btn-success {
+  color: #FFFFFF;
+  background: var(--btn-success);
+  border-color: var(--btn-success);
+}
+
+.btn-success:hover {
+  background: var(--btn-success-hover);
+  border-color: var(--btn-success-hover);
+}
+
+/* Coach themed */
+.btn-coach {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--coach-max), var(--coach-feliks));
+  border-color: transparent;
+}
+
+.btn-coach:hover {
+  filter: brightness(0.92);
+}
+
+/* Outline variants */
+.btn-outline-primary {
+  color: var(--btn-primary);
+  background: transparent;
+  border-color: var(--btn-primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--btn-primary);
+  color: #FFFFFF;
+}
+
+/* Disabled */
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Large button variant */
+.btn-lg {
+  min-height: 56px;
+  font-size: 1.15rem;
+  padding: var(--sp-md) var(--sp-xl);
+}
+
+/* ==========================================================================
+   14. Star Rating
+   ========================================================================== */
+
+.stars {
+  display: inline-flex;
+  gap: var(--sp-xs);
+  font-size: 1.8rem;
+}
+
+.stars .star {
+  color: var(--border);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.stars .star.filled {
+  color: var(--cube-yellow);
+}
+
+.stars .star.filled.animate {
+  animation: bounce 0.5s ease;
+}
+
+/* ==========================================================================
+   15. Fun Fact Box
+   ========================================================================== */
+
+.fun-fact {
+  background: #E3F2FD;
+  border-radius: var(--radius-lg);
+  padding: var(--sp-md) var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  border-left: 5px solid var(--btn-primary);
+}
+
+.fun-fact .fun-fact-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--btn-primary);
+  margin-bottom: var(--sp-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+/* ==========================================================================
+   16. Callout / Tooltip
+   ========================================================================== */
+
+.callout {
+  background: #FFF8E1;
+  border: 2px solid #F9A825;
+  border-radius: var(--radius);
+  padding: var(--sp-md) var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  position: relative;
+}
+
+.callout .callout-icon {
+  font-size: 1.3rem;
+  margin-right: var(--sp-sm);
+}
+
+.callout strong {
+  color: #E65100;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+/* Fade in */
+.fade-in {
+  animation: fadeIn var(--transition-slow) ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide in from right */
+.slide-in-right {
+  animation: slideInRight var(--transition-slow) ease both;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide in from left */
+.slide-in-left {
+  animation: slideInLeft var(--transition-slow) ease both;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Bounce */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  30%      { transform: translateY(-14px); }
+  50%      { transform: translateY(-6px); }
+  70%      { transform: translateY(-10px); }
+}
+
+.bounce {
+  animation: bounce 0.6s ease;
+}
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.12); opacity: 0.85; }
+}
+
+.pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* Confetti fall */
+@keyframes confetti {
+  0% {
+    top: -10px;
+    opacity: 1;
+    transform: rotateZ(0deg) scale(1);
+  }
+  25% {
+    transform: rotateZ(90deg) translateX(30px) scale(0.95);
+  }
+  50% {
+    transform: rotateZ(200deg) translateX(-20px) scale(1.05);
+    opacity: 1;
+  }
+  75% {
+    transform: rotateZ(300deg) translateX(15px) scale(0.9);
+    opacity: 0.7;
+  }
+  100% {
+    top: 105vh;
+    opacity: 0;
+    transform: rotateZ(400deg) translateX(-10px) scale(0.6);
+  }
+}
+
+/* Smooth transitions on interactive elements */
+button,
+a,
+input,
+select,
+[role="button"] {
+  transition: background var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+/* ==========================================================================
+   Utility classes
+   ========================================================================== */
+
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-sm { margin-top: var(--sp-sm); }
+.mt-md { margin-top: var(--sp-md); }
+.mt-lg { margin-top: var(--sp-lg); }
+.mb-sm { margin-bottom: var(--sp-sm); }
+.mb-md { margin-bottom: var(--sp-md); }
+.mb-lg { margin-bottom: var(--sp-lg); }
+
+/* ==========================================================================
+   Responsive — Tablet primary (768–1024px)
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .lesson-content {
+    padding: var(--sp-xl) var(--sp-lg);
+  }
+
+  .step {
+    padding: var(--sp-xl);
+  }
+
+  .cube-face {
+    width: 220px;
+    height: 220px;
+  }
+
+  .cube-net {
+    max-width: 480px;
+  }
+
+  .cube-3d {
+    max-width: 300px;
+  }
+
+  #stage-map {
+    max-width: 640px;
+    padding: var(--sp-xl) var(--sp-lg);
+  }
+
+  .algorithm-box .algo-move {
+    min-width: 56px;
+    font-size: 1.35rem;
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1025px) {
+  :root {
+    --font-size-base: 20px;
+  }
+
+  .lesson-content {
+    padding: var(--sp-xl) var(--sp-xl);
+  }
+
+  #stage-map {
+    max-width: 700px;
+  }
+
+  .cube-face {
+    width: 240px;
+    height: 240px;
+  }
+
+  .cube-net {
+    max-width: 520px;
+  }
+
+  .cube-3d {
+    max-width: 340px;
+  }
+}
+
+/* Phone (< 768px) */
+@media (max-width: 767px) {
+  :root {
+    --font-size-base: 17px;
+  }
+
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1.1rem; }
+
+  #welcome-screen .cube-graphic {
+    font-size: 3.5rem;
+  }
+
+  #welcome-screen h1 {
+    font-size: 1.8rem;
+  }
+
+  .lesson-top-bar {
+    padding: var(--sp-xs) var(--sp-sm);
+  }
+
+  .lesson-content {
+    padding: var(--sp-md) var(--sp-sm);
+  }
+
+  .lesson-bottom-nav {
+    padding: var(--sp-xs) var(--sp-sm);
+  }
+
+  .step {
+    padding: var(--sp-md);
+  }
+
+  .coach-bubble {
+    flex-direction: column;
+    gap: var(--sp-sm);
+    padding: var(--sp-md);
+  }
+
+  .coach-bubble .coach-avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+
+  .move-instruction {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--sp-sm);
+  }
+
+  .cube-face {
+    width: 150px;
+    height: 150px;
+  }
+
+  .cube-net {
+    max-width: 300px;
+  }
+
+  .cube-3d {
+    max-width: 200px;
+  }
+
+  .stage-card {
+    padding: var(--sp-sm) var(--sp-md);
+  }
+
+  .stage-card .stage-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .algorithm-box .algo-moves {
+    gap: var(--sp-xs);
+  }
+
+  .algorithm-box .algo-move {
+    min-width: 40px;
+    font-size: 1.05rem;
+  }
+
+  #celebration .celebration-content {
+    padding: var(--sp-lg);
+  }
+
+  #celebration .celebration-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* Very small phones (375px) */
+@media (max-width: 400px) {
+  :root {
+    --font-size-base: 16px;
+  }
+
+  .btn {
+    padding: var(--sp-sm) var(--sp-md);
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    padding: var(--sp-sm) var(--sp-lg);
+    font-size: 1rem;
+  }
+
+  .stage-card .stage-desc {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Accessibility: reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Print — just in case
+   ========================================================================== */
+
+@media print {
+  body {
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 12pt;
+  }
+
+  .lesson-bottom-nav,
+  .lesson-top-bar,
+  .app-header,
+  .side-menu,
+  .side-menu-overlay,
+  #celebration,
+  .confetti-piece {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   App Screen Management
+   ========================================================================== */
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Welcome Screen — App-specific
+   ========================================================================== */
+
+.welcome-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--sp-xl) var(--sp-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.welcome-cube {
+  margin-bottom: var(--sp-lg);
+}
+
+.welcome-cube svg {
+  display: inline-block;
+}
+
+.welcome-title {
+  font-size: 2.2rem;
+  margin-bottom: var(--sp-sm);
+  color: var(--text);
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: var(--sp-lg);
+}
+
+.coach-welcome {
+  display: flex;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-sm);
+}
+
+.coach-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.coach-max-avatar {
+  background: var(--coach-max);
+}
+
+.coach-feliks-avatar {
+  background: var(--coach-feliks);
+}
+
+.welcome-coach-text {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: var(--sp-xl);
+}
+
+.welcome-footer {
+  margin-top: var(--sp-lg);
+}
+
+.btn-large {
+  min-height: 56px;
+  font-size: 1.2rem;
+  padding: var(--sp-md) var(--sp-xl);
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  min-height: 48px;
+}
+
+.btn-text:hover {
+  color: var(--text);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--sp-xs);
+  border-radius: var(--radius);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.btn-danger {
+  background: #E74C3C;
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--sp-sm) var(--sp-lg);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 48px;
+}
+
+.btn-danger:hover {
+  background: #C0392B;
+}
+
+/* ==========================================================================
+   Stage Map — App-specific
+   ========================================================================== */
+
+.stage-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-md) var(--sp-md);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+}
+
+.stage-map-title {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.stage-map-path {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--sp-lg) var(--sp-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+}
+
+.stage-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  border: 3px solid var(--stage-color, var(--border));
+  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  box-shadow: 0 3px 8px var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.stage-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--shadow-lg);
+}
+
+.stage-card.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--border);
+}
+
+.stage-card.locked:hover {
+  transform: none;
+}
+
+.stage-card.completed {
+  border-color: var(--btn-success);
+  background: #F0FFF4;
+}
+
+.stage-card.current {
+  border-width: 4px;
+  box-shadow: 0 4px 14px var(--shadow-lg);
+}
+
+.stage-card-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--stage-color, var(--btn-secondary));
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.stage-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.stage-card-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.stage-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.stage-card-progress {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.stage-card-status {
+  flex-shrink: 0;
+  font-size: 1.4rem;
+}
+
+.stage-done-check {
+  color: var(--btn-success);
+  font-weight: 700;
+}
+
+.stage-lock {
+  filter: grayscale(100%);
+}
+
+.stage-lessons {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-sm);
+  padding-top: var(--sp-sm);
+  border-top: 1px solid var(--border);
+}
+
+.lesson-dot {
+  background: #F0F0F0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-xs) var(--sp-sm);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  min-height: 36px;
+  transition: background var(--transition-fast);
+}
+
+.lesson-dot:hover {
+  background: #E0E0E0;
+}
+
+.lesson-dot.completed {
+  background: #D4F5E2;
+  border-color: var(--btn-success);
+  color: var(--btn-success);
+}
+
+/* ==========================================================================
+   Lesson View — App-specific
+   ========================================================================== */
+
+.lesson-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+}
+
+.lesson-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson-stage-name {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.lesson-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.step-counter {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.lesson-progress-bar {
+  height: 6px;
+  background: var(--border);
+  width: 100%;
+}
+
+.lesson-progress-fill {
+  height: 100%;
+  background: var(--stage-color, var(--btn-primary));
+  border-radius: 0 3px 3px 0;
+  transition: width var(--transition-slow);
+  min-width: 2%;
+}
+
+.lesson-content {
+  flex: 1;
+  padding: var(--sp-lg) var(--sp-md);
+  max-width: var(--max-line-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.step-diagram {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--sp-lg);
+}
+
+.step-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.step-text {
+  font-size: 1.05rem;
+  line-height: var(--line-height);
+}
+
+.step-text strong {
+  color: var(--text);
+}
+
+.step-moves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+  justify-content: center;
+}
+
+.move-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-xs) var(--sp-sm);
+  background: #D4E8FF;
+  color: var(--btn-primary);
+  border: 2px solid var(--btn-primary);
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.cube-color {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.cube-color-white { background: #F0F0F0; color: #333; border: 1px solid #CCC; }
+.cube-color-yellow { background: #FFD500; color: #333; }
+.cube-color-red { background: #B71234; color: #FFF; }
+.cube-color-orange { background: #FF5800; color: #FFF; }
+.cube-color-blue { background: #0046AD; color: #FFF; }
+.cube-color-green { background: #009B48; color: #FFF; }
+
+/* Coach intro overlay within lesson */
+.coach-intro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-xl) var(--sp-md);
+  gap: var(--sp-lg);
+  max-width: var(--max-line-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.coach-bubble {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-md);
+  padding: var(--sp-lg);
+  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  border-left: 5px solid var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+  width: 100%;
+}
+
+.coach-message {
+  flex: 1;
+}
+
+.coach-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: var(--sp-xs);
+}
+
+.coach-text {
+  font-size: 1rem;
+  line-height: var(--line-height);
+}
+
+/* Coach-specific colors for bubbles */
+.coach-max-avatar + .coach-message .coach-name,
+.coach-intro .coach-max-avatar ~ .coach-message .coach-name {
+  color: var(--coach-max);
+}
+
+.coach-feliks-avatar + .coach-message .coach-name,
+.coach-intro .coach-feliks-avatar ~ .coach-message .coach-name {
+  color: var(--coach-feliks);
+}
+
+/* Check-in boxes in lesson */
+.check-in-box {
+  background: #FFFBE6;
+  border: 3px solid var(--cube-yellow);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  margin: var(--sp-md) auto;
+  max-width: var(--max-line-width);
+  text-align: center;
+}
+
+.check-in-icon {
+  margin-bottom: var(--sp-sm);
+}
+
+.check-in-icon svg {
+  display: inline-block;
+}
+
+.check-in-label {
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: var(--sp-sm);
+  color: #B8860B;
+}
+
+.check-in-text {
+  font-size: 1rem;
+  line-height: var(--line-height);
+}
+
+/* Adult check-in */
+.adult-check-in {
+  background: #FFF0ED;
+  border: 4px solid #E74C3C;
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  margin: var(--sp-md) auto;
+  max-width: var(--max-line-width);
+  text-align: center;
+}
+
+.adult-check-in-icon {
+  margin-bottom: var(--sp-sm);
+}
+
+.adult-check-in-icon svg {
+  display: inline-block;
+}
+
+.adult-check-in-label {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #C0392B;
+  margin-bottom: var(--sp-sm);
+}
+
+.adult-check-in-text {
+  font-size: 1rem;
+  line-height: var(--line-height);
+  margin-bottom: var(--sp-lg);
+}
+
+/* Lesson navigation */
+.lesson-nav {
+  display: flex;
+  gap: var(--sp-md);
+  padding: var(--sp-md);
+  border-top: 2px solid var(--border);
+  position: sticky;
+  bottom: 0;
+  background: var(--bg);
+  z-index: 100;
+}
+
+.btn-back, .btn-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-xs);
+  min-height: 56px;
+  padding: var(--sp-sm) var(--sp-lg);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-back {
+  background: #E8E8E8;
+  color: var(--text);
+  flex: 0 0 auto;
+}
+
+.btn-back:hover {
+  background: #D0D0D0;
+}
+
+.btn-next {
+  background: var(--btn-success);
+  color: #FFFFFF;
+  flex: 1;
+}
+
+.btn-next:hover {
+  background: var(--btn-success-hover);
+}
+
+.btn-next:active, .btn-back:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================================================
+   Celebration Modal — App-specific
+   ========================================================================== */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(51, 51, 51, 0.65);
+  padding: var(--sp-md);
+}
+
+.modal-content {
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-xl);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.celebration-content {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.celebration-star {
+  font-size: 4rem;
+  margin-bottom: var(--sp-md);
+  animation: bounce 0.6s ease;
+}
+
+.celebration-title {
+  font-size: 1.8rem;
+  margin-bottom: var(--sp-sm);
+}
+
+.celebration-text {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  margin-bottom: var(--sp-lg);
+}
+
+.celebration-coach {
+  margin-bottom: var(--sp-lg);
+}
+
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  top: -20px;
+  animation: confetti-fall 3s ease-in forwards;
+}
+
+.confetti-piece:nth-child(odd) {
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+}
+
+@keyframes confetti-fall {
+  0% {
+    top: -10px;
+    opacity: 1;
+    transform: rotateZ(0deg) translateX(0);
+  }
+  25% {
+    transform: rotateZ(90deg) translateX(30px);
+  }
+  50% {
+    transform: rotateZ(200deg) translateX(-20px);
+    opacity: 1;
+  }
+  75% {
+    transform: rotateZ(300deg) translateX(15px);
+    opacity: 0.7;
+  }
+  100% {
+    top: 105vh;
+    opacity: 0;
+    transform: rotateZ(400deg) translateX(-10px);
+  }
+}
+
+/* ==========================================================================
+   Settings Panel
+   ========================================================================== */
+
+.settings-content {
+  text-align: left;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-lg);
+}
+
+.settings-header h2 {
+  margin: 0;
+}
+
+.setting-group {
+  margin-bottom: var(--sp-lg);
+}
+
+.setting-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: var(--sp-sm);
+}
+
+.size-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
+
+.size-btn {
+  min-height: 44px;
+  padding: var(--sp-xs) var(--sp-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.size-btn:hover {
+  background: #F0F0F0;
+}
+
+.size-btn.active {
+  background: var(--btn-primary);
+  color: #FFFFFF;
+  border-color: var(--btn-primary);
+}
+
+/* ==========================================================================
+   Highlight sticker animation (from cube-renderer)
+   ========================================================================== */
+
+.highlight-sticker {
+  animation: sticker-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes sticker-pulse {
+  0%, 100% {
+    stroke-width: 3;
+    stroke: #FFD700;
+    filter: drop-shadow(0 0 2px #FFD700);
+  }
+  50% {
+    stroke-width: 4;
+    stroke: #FFA500;
+    filter: drop-shadow(0 0 8px #FFD700);
+  }
+}
