@@ -472,6 +472,11 @@ input[type="submit"] {
 
 .coach-bubble.coach-max .coach-avatar {
   background: var(--coach-max);
+  background-image: url('../img/max-strip.png');
+  background-size: calc(100% * 12) 100%;
+  animation: sprite-solve 2.4s steps(12) infinite;
+  color: transparent;
+  image-rendering: pixelated;
 }
 
 .coach-bubble.coach-max .coach-name {
@@ -486,6 +491,11 @@ input[type="submit"] {
 
 .coach-bubble.coach-feliks .coach-avatar {
   background: var(--coach-feliks);
+  background-image: url('../img/feliks-strip.png');
+  background-size: calc(100% * 12) 100%;
+  animation: sprite-solve 2.4s steps(12) infinite;
+  color: transparent;
+  image-rendering: pixelated;
 }
 
 .coach-bubble.coach-feliks .coach-name {
@@ -1468,10 +1478,38 @@ select,
 
 .coach-max-avatar {
   background: var(--coach-max);
+  background-image: url('../img/max-strip.png');
+  background-size: calc(100% * 12) 100%;
+  background-position: 0% 0%;
+  animation: sprite-solve 2.4s steps(12) infinite;
+  color: transparent;
+  overflow: hidden;
+  image-rendering: pixelated;
 }
 
 .coach-feliks-avatar {
   background: var(--coach-feliks);
+  background-image: url('../img/feliks-strip.png');
+  background-size: calc(100% * 12) 100%;
+  background-position: 0% 0%;
+  animation: sprite-solve 2.4s steps(12) infinite;
+  color: transparent;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+@keyframes sprite-solve {
+  from { background-position: 0% 0%; }
+  to   { background-position: -1200% 0%; }
+}
+
+/* Pause animation when not visible / reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .coach-max-avatar,
+  .coach-feliks-avatar {
+    animation: none;
+    background-position: 0% 0%;
+  }
 }
 
 .welcome-coach-text {
