@@ -1,7 +1,7 @@
 // Stage 7 — Position Yellow Corners
 // Permute corners so each one is between the right three colors.
 
-export const stage7 = {
+const stage7 = {
   id: 7,
   title: 'Position Corners',
   subtitle: 'Put the yellow corners in the right spots',

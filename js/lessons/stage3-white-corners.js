@@ -1,7 +1,7 @@
 // Stage 3 — White Corners
 // Complete the first layer by inserting white corner pieces.
 
-export const stage3 = {
+const stage3 = {
   id: 3,
   title: 'White Corners',
   subtitle: 'Finish the whole first layer',

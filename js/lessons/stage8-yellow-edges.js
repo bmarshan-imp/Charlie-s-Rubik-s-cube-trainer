@@ -1,7 +1,7 @@
 // Stage 8 — Position Yellow Edges (Final Step!)
 // Cycle the last layer edges into their correct positions to solve the cube!
 
-export const stage8 = {
+const stage8 = {
   id: 8,
   title: 'Final Edges',
   subtitle: 'The last step — solve the cube!',

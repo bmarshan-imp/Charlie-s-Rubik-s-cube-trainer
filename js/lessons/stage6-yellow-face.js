@@ -1,7 +1,7 @@
 // Stage 6 — Yellow Face
 // Orient all yellow corners so the entire top face is yellow.
 
-export const stage6 = {
+const stage6 = {
   id: 6,
   title: 'Yellow Face',
   subtitle: 'Make the whole top yellow',

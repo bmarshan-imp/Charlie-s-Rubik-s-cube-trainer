@@ -1,7 +1,7 @@
 // Stage 2 — White Cross
 // First real solving step: build a plus-sign of white edges on top.
 
-export const stage2 = {
+const stage2 = {
   id: 2,
   title: 'White Cross',
   subtitle: 'Build a white plus sign on top',
