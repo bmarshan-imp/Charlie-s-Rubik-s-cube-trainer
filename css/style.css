@@ -449,8 +449,9 @@ input[type="submit"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
-  color: #FFFFFF;
+  font-size: 0;
+  color: transparent;
+  overflow: hidden;
 }
 
 .coach-bubble .coach-message {
@@ -1500,9 +1501,10 @@ select,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 0;
   font-weight: 700;
-  color: #FFFFFF;
+  color: transparent;
+  overflow: hidden;
 }
 
 .coach-max-avatar {
