@@ -52,6 +52,7 @@ html {
   /* Coach accents */
   --coach-max: #0046AD;
   --coach-feliks: #009B48;
+  --coach-charlie: #FF6B00;
 
   /* Typography */
   --font-family: 'OpenDyslexic', 'Comic Sans MS', Verdana, sans-serif;
@@ -502,6 +503,26 @@ input[type="submit"] {
 
 .coach-bubble.coach-feliks .coach-name {
   color: var(--coach-feliks);
+}
+
+/* Coach Charlie variant — orange */
+.coach-bubble.coach-charlie {
+  border-left-color: var(--coach-charlie);
+  background: #FFF3E6;
+}
+
+.coach-bubble.coach-charlie .coach-avatar {
+  background: var(--coach-charlie);
+  background-image: url('../img/charlie-strip.png');
+  background-size: calc(140% * 25) 140%;
+  animation: sprite-solve-charlie 5s steps(25) infinite;
+  color: transparent;
+  font-size: 0;
+  image-rendering: pixelated;
+}
+
+.coach-bubble.coach-charlie .coach-name {
+  color: var(--coach-charlie);
 }
 
 /* ==========================================================================
@@ -1502,15 +1523,33 @@ select,
   image-rendering: pixelated;
 }
 
+.coach-charlie-avatar {
+  background: var(--coach-charlie);
+  background-image: url('../img/charlie-strip.png');
+  background-size: calc(140% * 25) 140%;
+  background-position: -20% -20%;
+  animation: sprite-solve-charlie 5s steps(25) infinite;
+  color: transparent;
+  font-size: 0;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
 @keyframes sprite-solve {
   from { background-position: -20% -20%; }
   to   { background-position: -1700% -20%; }
 }
 
+@keyframes sprite-solve-charlie {
+  from { background-position: -20% -20%; }
+  to   { background-position: -3520% -20%; }
+}
+
 /* Pause animation when not visible / reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .coach-max-avatar,
-  .coach-feliks-avatar {
+  .coach-feliks-avatar,
+  .coach-charlie-avatar {
     animation: none;
     background-position: -20% -20%;
   }
