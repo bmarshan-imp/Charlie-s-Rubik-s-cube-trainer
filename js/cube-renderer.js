@@ -581,8 +581,9 @@ function renderMoveArrow(move, size = 100) {
   const cellSize = faceSize / 3;
 
   // Map move to its face color and friendly name
-  const baseMove = move.replace("'", '');
+  const baseMove = move.replace("'", '').replace('2', '');
   const prime = move.includes("'");
+  const double = move.includes('2');
 
   const FACE_INFO = {
     R: { color: COLORS.B,  name: 'Right' },
@@ -594,7 +595,7 @@ function renderMoveArrow(move, size = 100) {
   };
   const info = FACE_INFO[baseMove] || { color: '#ccc', name: baseMove };
   const centerColor = info.color;
-  const friendlyName = info.name + (prime ? ' \u21A9' : '');
+  const friendlyName = info.name + (prime ? ' \u21A9' : double ? ' ×2' : '');
 
   // Light 3x3 grid background with colored centre tile
   let grid = '';
