@@ -14,11 +14,11 @@ const stage4 = {
       title: 'Flip and Find Edges',
       coachIntro: {
         coach: 'max',
-        text: "Great work on the first layer! Now flip your cube upside down — white goes to the bottom. We want to see the yellow center on top. This is how we'll hold the cube for the rest of the solve!",
+        text: "Great work on the first layer! Keep holding the cube the same way — white on the bottom, yellow on top. Now we'll fill in the middle layer edges!",
       },
       steps: [
         {
-          text: "**Flip the cube over!**\n\n[White] goes on the **bottom** (you already solved it — hide it away).\n[Yellow] is now on **top**.\n\nFrom now on, we always hold the cube this way.",
+          text: "**Keep [White] on the bottom!**\n\nYou already have it there from solving the corners — nice.\n[Yellow] stays on **top**.\n\nFrom now on, we always hold the cube this way.",
         },
         {
           text: "**What's the second layer?**\n\nIt's the **middle ring** of edges — the four edge pieces between the top and bottom layers.\n\nThese edges have **no yellow** on them (yellow edges belong on top, which we'll do later).",
@@ -28,7 +28,7 @@ const stage4 = {
         },
       ],
       checkIn: {
-        text: "Flip your cube so [Yellow] is on top. Can you find any edge pieces in the top layer that have no yellow?",
+        text: "With [Yellow] on top, can you find any edge pieces in the top layer that have no yellow?",
       },
       celebration: "You know which edges belong in the middle!",
     },

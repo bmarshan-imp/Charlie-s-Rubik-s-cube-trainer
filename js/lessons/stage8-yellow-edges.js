@@ -43,9 +43,9 @@ const stage8 = {
       },
       steps: [
         {
-          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", "R'", "R'"], size: 70 },
+          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70 },
           text: "**Clockwise cycle** (front edge needs to go right):\n\nThat's a lot of moves! Let's break it down.",
-          moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", "R'", "R'"],
+          moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'],
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70 },
