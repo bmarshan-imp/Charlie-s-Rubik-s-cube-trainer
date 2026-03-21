@@ -473,7 +473,7 @@ input[type="submit"] {
 .coach-bubble.coach-max .coach-avatar {
   background: var(--coach-max);
   background-image: url('../img/max-strip.png');
-  background-size: calc(100% * 12) 100%;
+  background-size: calc(140% * 12) 140%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
   font-size: 0;
@@ -493,7 +493,7 @@ input[type="submit"] {
 .coach-bubble.coach-feliks .coach-avatar {
   background: var(--coach-feliks);
   background-image: url('../img/feliks-strip.png');
-  background-size: calc(100% * 12) 100%;
+  background-size: calc(140% * 12) 140%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
   font-size: 0;
@@ -1481,8 +1481,8 @@ select,
 .coach-max-avatar {
   background: var(--coach-max);
   background-image: url('../img/max-strip.png');
-  background-size: calc(100% * 12) 100%;
-  background-position: 0% 0%;
+  background-size: calc(140% * 12) 140%;
+  background-position: -20% -20%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
   font-size: 0;
@@ -1493,8 +1493,8 @@ select,
 .coach-feliks-avatar {
   background: var(--coach-feliks);
   background-image: url('../img/feliks-strip.png');
-  background-size: calc(100% * 12) 100%;
-  background-position: 0% 0%;
+  background-size: calc(140% * 12) 140%;
+  background-position: -20% -20%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
   font-size: 0;
@@ -1503,8 +1503,8 @@ select,
 }
 
 @keyframes sprite-solve {
-  from { background-position: 0% 0%; }
-  to   { background-position: -1200% 0%; }
+  from { background-position: -20% -20%; }
+  to   { background-position: -1700% -20%; }
 }
 
 /* Pause animation when not visible / reduced motion */
@@ -1512,7 +1512,7 @@ select,
   .coach-max-avatar,
   .coach-feliks-avatar {
     animation: none;
-    background-position: 0% 0%;
+    background-position: -20% -20%;
   }
 }
 
