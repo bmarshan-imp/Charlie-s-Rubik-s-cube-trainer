@@ -2047,7 +2047,7 @@ select,
 .celebration-content {
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .celebration-star {

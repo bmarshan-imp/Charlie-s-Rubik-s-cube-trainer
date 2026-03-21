@@ -19,58 +19,58 @@ const stage1 = {
       steps: [
         {
           diagram: { type: 'net', state: 'solved' },
-          text: "A Rubik's cube has **six faces**. Each face has a name based on where it is when you hold the cube in front of you.",
+          text: "A Rubik's cube has **six faces**. Each face has a name based on where it is when you hold the cube in front of you.\n\nYou can tell which face is which by the **colour in the middle** — that never changes!",
         },
         {
           diagram: {
             type: 'face',
             colors: ['W','W','W','W','W','W','W','W','W'],
-            labels: ['','','','','U','','','',''],
+            labels: ['','','','','Top','','','',''],
           },
-          text: "**Up (U)** — the face on top.\n\nOn a standard cube, [White] is on top.",
+          text: "**Top** — the face on top.\n\nOn a standard cube, [White] is on top.",
         },
         {
           diagram: {
             type: 'face',
             colors: ['Y','Y','Y','Y','Y','Y','Y','Y','Y'],
-            labels: ['','','','','D','','','',''],
+            labels: ['','','','','Bottom','','','',''],
           },
-          text: "**Down (D)** — the face on the bottom.\n\n[Yellow] lives down here.",
+          text: "**Bottom** — the face underneath.\n\n[Yellow] lives down here.",
         },
         {
           diagram: {
             type: 'face',
             colors: ['R','R','R','R','R','R','R','R','R'],
-            labels: ['','','','','F','','','',''],
+            labels: ['','','','','Front','','','',''],
           },
-          text: "**Front (F)** — the face looking at you.\n\n[Red] is our front face.",
+          text: "**Front** — the face looking at you.\n\n[Red] is our front face.",
         },
         {
           diagram: {
             type: 'face',
             colors: ['O','O','O','O','O','O','O','O','O'],
-            labels: ['','','','','B','','','',''],
+            labels: ['','','','','Back','','','',''],
           },
-          text: "**Back (B)** — the face away from you.\n\n[Orange] hides in the back.",
+          text: "**Back** — the face away from you.\n\n[Orange] hides in the back.",
         },
         {
           diagram: {
             type: 'face',
             colors: ['G','G','G','G','G','G','G','G','G'],
-            labels: ['','','','','L','','','',''],
+            labels: ['','','','','Left','','','',''],
           },
-          text: "**Left (L)** — the face on your left hand.\n\n[Green] is on the left.",
+          text: "**Left** — the face on your left hand.\n\n[Green] is on the left.",
         },
         {
           diagram: {
             type: 'face',
             colors: ['B','B','B','B','B','B','B','B','B'],
-            labels: ['','','','','R','','','',''],
+            labels: ['','','','','Right','','','',''],
           },
-          text: "**Right (R)** — the face on your right hand.\n\n[Blue] is on the right.",
+          text: "**Right** — the face on your right hand.\n\n[Blue] is on the right.",
         },
         {
-          text: "**Quick memory trick:**\nHold the cube with [White] on top and [Red] facing you.\n\nNow the faces always match:\n**U**p = [White], **D**own = [Yellow]\n**F**ront = [Red], **B**ack = [Orange]\n**L**eft = [Green], **R**ight = [Blue]",
+          text: "**Quick memory trick:**\nHold the cube with [White] on top and [Red] facing you.\n\nNow the faces always match their colour:\n**Top** = [White], **Bottom** = [Yellow]\n**Front** = [Red], **Back** = [Orange]\n**Left** = [Green], **Right** = [Blue]",
         },
       ],
       checkIn: {
@@ -140,51 +140,51 @@ const stage1 = {
       steps: [
         {
           diagram: { type: 'moveArrow', moves: ['R'], size: 130 },
-          text: "**Right — follow the arrow!**\n\nHold your cube with [White] on top and [Red] facing you.\n\nGrab the [Blue] side (your right hand) and push the top of it **away from you**.\n\nThe red arrow shows the direction!",
+          text: "**Right — follow the arrow!**\n\nHold your cube with [White] on top and [Red] facing you.\n\nGrab the [Blue] side (your right hand) and push the top of it **away from you**.\n\nThe coloured square in the middle shows you which face to turn. The red arrow shows which way!",
         },
         {
           diagram: { type: 'moveArrow', moves: ["R'"], size: 130 },
-          text: "**Right Undo — the arrow goes the other way!**\n\nSee the little mark after the R? That means **go backwards**.\n\nGrab the [Blue] side again and pull the top **toward you** this time.\n\nDo {R} then {R'} — everything goes back! They undo each other.",
+          text: "**Right Undo — the arrow flips!**\n\nSee the little hook \u21A9 in the label? That means **go the other way**.\n\nGrab the [Blue] side again and pull the top **toward you** this time.\n\nDo {Right} then {Right \u21A9} — everything goes back! They undo each other.",
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', "R'"], size: 110 },
-          text: "**The big idea:**\n\nEvery move has a **do** and an **undo**.\n\nNo little mark = follow the arrow.\nLittle mark \u2032 = arrow goes the other way.\n\nTry {R} then {R'} a few times. See how they cancel out?",
+          text: "**The big idea:**\n\nEvery move has a **do** and an **undo**.\n\nNo hook = follow the arrow.\nHook \u21A9 = go the other way.\n\nTry {Right} then {Right \u21A9} a few times. See how they cancel out?",
         },
         {
           diagram: { type: 'moveArrow', moves: ['U'], size: 130 },
-          text: "**Up — spin the top!**\n\nGrab the [White] top layer and spin it so the front row moves to the **left**.\n\nFollow the red arrow!",
+          text: "**Top — spin the top!**\n\nLook at the [White] centre square in the picture. Grab that top layer and spin it so the front row moves to the **left**.\n\nFollow the red arrow!",
         },
         {
           diagram: { type: 'moveArrow', moves: ["U'"], size: 130 },
-          text: "**Up Undo**\n\nSame top layer, but spin it the **other way** — front row moves to the right.\n\nAgain, {U} then {U'} puts it all back.",
+          text: "**Top Undo**\n\nSame top layer, but spin it the **other way** — front row moves to the right.\n\n{Top} then {Top \u21A9} puts it all back.",
         },
         {
           diagram: { type: 'moveArrow', moves: ['F'], size: 130 },
-          text: "**Front — twist the face looking at you!**\n\nGrab the [Red] front face and turn it like a steering wheel — top goes to the right.\n\nThe curvy arrow shows the spin direction!",
+          text: "**Front — twist the face looking at you!**\n\nSee the [Red] centre? Grab that front face and turn it like a steering wheel — top goes to the right.\n\nThe curvy arrow shows the spin direction!",
         },
         {
           diagram: { type: 'moveArrow', moves: ["F'"], size: 130 },
-          text: "**Front Undo**\n\nSame front face, but steer the other way — top goes left.\n\n{F} then {F'} cancels out, just like the others!",
+          text: "**Front Undo**\n\nSame front face, but steer the other way — top goes left.\n\n{Front} then {Front \u21A9} cancels out, just like the others!",
         },
         {
           diagram: { type: 'moveArrow', moves: ['L', "L'", 'D', "D'", 'B', "B'"], size: 90 },
-          text: "**The other three sides work the same way!**\n\nEach picture shows you the arrow direction. The \u2032 version always goes the opposite way.\n\nYou don't need to memorise letters — just **follow the arrows** when you see them!",
+          text: "**The other three sides work the same way!**\n\nThe coloured square in the middle tells you which face. The arrow tells you which way. The \u21A9 version always goes the opposite way.\n\nYou don't need to memorise letters — just **look at the colour and follow the arrows**!",
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
-          text: "**Your first combo!**\n\nDo these four moves **left to right**, one at a time. Follow each arrow!\n\nThis combo is super important — you'll use it a LOT later!",
+          text: "**Your first combo!**\n\nDo these four moves **left to right**, one at a time. Look at each colour and follow each arrow!\n\nThis combo is super important — you'll use it a LOT later!",
           moves: ['R', 'U', "R'", "U'"],
         },
       ],
       checkIn: {
-        text: "Try doing {R} {U} {R'} {U'} six times in a row. Follow the arrows each time. Your cube should return to the start! (It's like magic.)",
+        text: "Try doing {Right} {Top} {Right \u21A9} {Top \u21A9} six times in a row. Follow the arrows each time. Your cube should return to the start! (It's like magic.)",
       },
-      celebration: "You can read and do cube moves! You're speaking the cuber's language now!",
+      celebration: "You can read and do cube moves now! Look at the colour, follow the arrow!",
     },
   ],
 
   adultCheckIn: {
-    text: "**Grown-up check!**\n\nCan Charlie name the six faces and show you an {R} move and an {R'} move?\n\nIf yes, they're ready for Stage 2!",
+    text: "**Grown-up check!**\n\nCan Charlie name the six faces and show you a {Right} move and a {Right \u21A9} move?\n\nIf yes, they're ready for Stage 2!",
   },
 
   coachOutro: {
