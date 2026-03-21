@@ -2103,6 +2103,34 @@ select,
   animation: bounce 0.6s ease;
 }
 
+.celebration-charlie-sprite {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto var(--sp-md);
+  border-radius: 50%;
+  background: var(--coach-charlie);
+  background-image: url('../img/charlie-strip.png');
+  background-size: 3640px 145.6px;
+  background-position: -20.8px -20.8px;
+  animation: sprite-solve-charlie-big 5s steps(25) infinite, bounce 0.6s ease;
+  image-rendering: pixelated;
+  overflow: hidden;
+  color: transparent;
+  font-size: 0;
+}
+
+@keyframes sprite-solve-charlie-big {
+  from { background-position: -20.8px -20.8px; }
+  to   { background-position: -3660.8px -20.8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celebration-charlie-sprite {
+    animation: none;
+    background-position: -20.8px -20.8px;
+  }
+}
+
 .celebration-title {
   font-size: 1.8rem;
   margin-bottom: var(--sp-sm);
