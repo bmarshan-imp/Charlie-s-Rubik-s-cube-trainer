@@ -48,7 +48,8 @@ const stage3 = {
       },
       steps: [
         {
-          text: "**The Right-Hand Trigger:**\n\n{R} {U} {R'} {U'}\n\nSay it like a rhythm: **Right, Up, Right-back, Up-back.**\n\nPractice it a few times until it feels natural!",
+          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
+          text: "**The Right-Hand Trigger:**\n\nSay it like a rhythm: **Right, Up, Right-back, Up-back.**\n\nPractice it a few times until it feels natural!",
           moves: ['R', 'U', "R'", "U'"],
         },
         {
@@ -80,15 +81,18 @@ const stage3 = {
           text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces the **front** (toward you)\n2. White faces the **right** side\n3. White faces **down**\n\nEach case needs a different number of triggers.",
         },
         {
-          text: "**Case 1: White faces the right side**\n\nThis is the easy one! Just do the trigger once:\n\n{R} {U} {R'} {U'}\n\nThe corner pops right into place with white on top!",
+          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
+          text: "**Case 1: White faces the right side**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner pops right into place with white on top!",
           moves: ['R', 'U', "R'", "U'"],
         },
         {
-          text: "**Case 2: White faces toward you (front)**\n\nDo the trigger **three times:**\n\n{R} {U} {R'} {U'} — three times\n\nWatch the corner — it travels around and lands with white on top.",
+          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
+          text: "**Case 2: White faces toward you (front)**\n\nDo the trigger **three times!**\n\nWatch the corner — it travels around and lands with white on top.",
           moves: ['R', 'U', "R'", "U'", '×3'],
         },
         {
-          text: "**Case 3: White faces down**\n\nDo the trigger **five times:**\n\n{R} {U} {R'} {U'} — five times\n\nIt takes longer, but it works perfectly!",
+          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
+          text: "**Case 3: White faces down**\n\nDo the trigger **five times!**\n\nIt takes longer, but it works perfectly!",
           moves: ['R', 'U', "R'", "U'", '×5'],
         },
         {

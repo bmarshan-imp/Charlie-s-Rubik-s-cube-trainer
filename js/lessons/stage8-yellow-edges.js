@@ -43,11 +43,13 @@ const stage8 = {
       },
       steps: [
         {
-          text: "**Clockwise cycle** (front edge needs to go right):\n\n{R} {U'} {R} {U} {R} {U} {R} {U'} {R'} {U'} {R'} {R'}\n\nThat's a lot of moves! Let's break it down.",
+          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", "R'", "R'"], size: 70 },
+          text: "**Clockwise cycle** (front edge needs to go right):\n\nThat's a lot of moves! Let's break it down.",
           moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", "R'", "R'"],
         },
         {
-          text: "**Break it into chunks:**\n\n{R} {U'} — start\n{R} {U} — go up\n{R} {U} — go up again\n{R} {U'} — turn back\n{R'} {U'} — reverse\n{R'} {R'} — double finish\n\nPractice it slowly — it's just R and U moves!",
+          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70 },
+          text: "**Break it into chunks:**\n\nStart, go up, go up again, turn back, reverse, double finish.\n\nPractice it slowly — it's just R and U moves!",
           moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'],
         },
         {
