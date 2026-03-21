@@ -73,10 +73,12 @@ const stage2 = {
           text: "**How to find white edges:**\n\nLook around your whole cube for edge pieces that have a white sticker.\n\nThey could be anywhere — on the sides, on the bottom, tucked in the middle layer.\n\nWe need to get all four up to the top (around [Yellow]).",
         },
         {
-          text: "**If a white edge is in the middle layer:**\n\nTurn the face it's on so the white sticker goes up to the top.\n\nJust one turn of that face should do it!\n\n**Tip:** If moving it up would knock out a white edge already on top, first turn the top ({U}) to move the good edge out of the way.",
+          diagram: { type: 'moveArrow', moves: ['U'], size: 130 },
+          text: "**If a white edge is in the middle layer:**\n\nTurn the face it's on so the white sticker goes up to the top.\n\nJust one turn of that face should do it!\n\n**Tip:** If moving it up would knock out a white edge already on top, first turn the top ({Top}) to move the good edge out of the way.",
         },
         {
-          text: "**If a white edge is on the bottom ([White] face):**\n\nTurn the face it's on **twice** to bring it from the bottom to the top.\n\nFor example, if it's on the front-bottom, do {F} {F} to flip it up.",
+          diagram: { type: 'moveArrow', moves: ['F', 'F'], size: 110 },
+          text: "**If a white edge is on the bottom ([White] face):**\n\nTurn the face it's on **twice** to bring it from the bottom to the top.\n\nFor example, if it's on the front-bottom, do {Front} {Front} to flip it up.",
         },
         {
           text: "**Keep going until you have all four white petals around [Yellow]!**\n\nDon't worry about the second color of each edge yet — just get white edges to the top.\n\nTake your time. This is a puzzle within a puzzle!",
@@ -101,11 +103,12 @@ const stage2 = {
           text: "Your daisy is on top (white edges around [Yellow]).\n\n**Now look at the side colors.** Each white edge has a second color — that's the one we need to match.\n\nPick any white petal and look at its side color.",
         },
         {
-          text: "**Turn the top ({U}) until that side color matches the center below it.**\n\nFor example, if the side color is [Red], turn {U} until it's above the [Red] center.\n\nThen flip that face **twice** to send the white edge to the bottom.\n\nIf it was on the front: {F} {F}\nIf it was on the right: {R} {R}",
+          diagram: { type: 'moveArrow', moves: ['U', 'F', 'F'], size: 110 },
+          text: "**Turn the top ({Top}) until that side color matches the center below it.**\n\nFor example, if the side color is [Red], turn {Top} until it's above the [Red] center.\n\nThen flip that face **twice** to send the white edge to the bottom.\n\nIf it was on the front: {Front} {Front}\nIf it was on the right: {Right} {Right}",
           moves: ['U', '(match)', 'F F'],
         },
         {
-          text: "**Repeat for all four petals:**\n\n1. Turn {U} to line up the side color with its center\n2. Flip that face twice to send the petal down\n3. Move to the next petal\n\nAfter all four, flip the cube over so [White] is on top.",
+          text: "**Repeat for all four petals:**\n\n1. Turn {Top} to line up the side color with its center\n2. Flip that face twice to send the petal down\n3. Move to the next petal\n\nAfter all four, flip the cube over so [White] is on top.",
         },
         {
           diagram: {
@@ -113,7 +116,7 @@ const stage2 = {
             colors: ['X','W','X','W','W','W','X','W','X'],
             highlights: [1, 3, 5, 7],
           },
-          text: "**You should now have the white cross!**\n\nCheck: Is [White] on top with a plus sign? Do the side colors match their centers?\n\nIf a side color doesn't match, don't panic — just flip that edge back up ({F} {F}), realign with {U}, and flip back down.",
+          text: "**You should now have the white cross!**\n\nCheck: Is [White] on top with a plus sign? Do the side colors match their centers?\n\nIf a side color doesn't match, don't panic — just flip that edge back up ({Front} {Front}), realign with {Top}, and flip back down.",
         },
       ],
       checkIn: {
