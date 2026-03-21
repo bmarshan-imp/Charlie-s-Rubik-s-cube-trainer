@@ -53,7 +53,7 @@ const stage3 = {
           moves: ['R', 'U', "R'", "U'"],
         },
         {
-          text: "This trigger does something magical — it cycles corners in and out of the top layer without breaking the cross.\n\n**Try it:** Do the trigger 6 times. Your cube returns to where it started!\n\nThis means it's **safe** — you can't permanently mess up with it.",
+          text: "This trigger does something magical — it cycles corners between the top and bottom layers without breaking the cross.\n\n**Try it:** Do the trigger 6 times. Your cube returns to where it started!\n\nThis means it's **safe** — you can't permanently mess up with it.",
         },
         {
           text: "**Why does this matter?**\n\nTo insert a white corner, we'll use this trigger **1 to 5 times** depending on how the corner is oriented.\n\nThe trigger gently nudges the corner into place.\n\nLet's learn the cases!",
@@ -75,42 +75,42 @@ const stage3 = {
       },
       steps: [
         {
-          text: "**Setup:** Hold [White] on top. Find a white corner in the **bottom layer**.\n\nTurn the bottom ({D}) to position that corner directly **below its home** — the spot where its three colors match the three surrounding centers.",
+          text: "**Setup:** Flip your cube so [White] is on the **bottom** and [Yellow] is on top.\n\nFind a white corner in the **top layer**. Turn the top ({U}) to position that corner so it's at the **front-left** — the spot where its non-white colors match the front and right centers.",
         },
         {
-          text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces the **front** (toward you)\n2. White faces the **right** side\n3. White faces **down**\n\nEach case needs a different number of triggers.",
+          text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces the **left** side\n2. White faces **up**\n3. White faces **toward you** (front)\n\nEach case needs a different number of triggers.",
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
-          text: "**Case 1: White faces the right side**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner pops right into place with white on top!",
+          text: "**Case 1: White faces the left side**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner drops right into place with white on the bottom!",
           moves: ['R', 'U', "R'", "U'"],
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
-          text: "**Case 2: White faces toward you (front)**\n\nDo the trigger **three times!**\n\nWatch the corner — it travels around and lands with white on top.",
+          text: "**Case 2: White faces up**\n\nDo the trigger **three times!**\n\nWatch the corner — it travels around and lands with white on the bottom.",
           moves: ['R', 'U', "R'", "U'", '×3'],
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
-          text: "**Case 3: White faces down**\n\nDo the trigger **five times!**\n\nIt takes longer, but it works perfectly!",
+          text: "**Case 3: White faces toward you (front)**\n\nDo the trigger **five times!**\n\nIt takes longer, but it works perfectly!",
           moves: ['R', 'U', "R'", "U'", '×5'],
         },
         {
-          text: "**What if a white corner is already on top but wrong?**\n\nHold that corner in the front-right position and do the trigger once. It will pop out to the bottom layer.\n\nThen use {D} to position it below its home, and insert it using the cases above.",
+          text: "**What if a white corner is already on the bottom but wrong?**\n\nHold that corner in the front-right position and do the trigger once. It will pop out to the top layer.\n\nThen use {U} to position it at the front-left, and insert it using the cases above.",
         },
         {
-          text: "**The full process:**\n\n1. Find a white corner (check the bottom layer)\n2. Use {D} to put it below its home\n3. Hold that spot at front-right\n4. Do the trigger until white is on top\n5. Repeat for all four corners!\n\nTake your time — this is the hardest part of Stage 3.",
+          text: "**The full process:**\n\n1. Find a white corner (check the top layer)\n2. Use {U} to put it at the front-left, matching the front and right centers\n3. Hold the home slot at front-right on the bottom\n4. Do the trigger until white is on the bottom\n5. Repeat for all four corners!\n\nTake your time — this is the hardest part of Stage 3.",
         },
       ],
       checkIn: {
-        text: "Can you insert all four white corners? The entire [White] face should be solved, and the top part of each side should match its center color!",
+        text: "Can you insert all four white corners? The entire [White] face should be solved, and the bottom part of each side should match its center color!",
       },
-      celebration: "First layer DONE! The whole top is white with matching sides!",
+      celebration: "First layer DONE! The whole bottom is white with matching sides!",
     },
   ],
 
   adultCheckIn: {
-    text: "**Grown-up check!**\n\nIs Charlie's entire top layer solved? The [White] face should be complete, and the first row of each side should be one solid color matching its center.\n\nIf yes, they're ready for Stage 4!",
+    text: "**Grown-up check!**\n\nIs Charlie's entire first layer solved? The [White] face on the bottom should be complete, and the bottom row of each side should be one solid color matching its center.\n\nIf yes, they're ready for Stage 4!",
   },
 
   coachOutro: {
