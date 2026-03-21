@@ -476,6 +476,7 @@ input[type="submit"] {
   background-size: calc(100% * 12) 100%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
+  font-size: 0;
   image-rendering: pixelated;
 }
 
@@ -495,6 +496,7 @@ input[type="submit"] {
   background-size: calc(100% * 12) 100%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
+  font-size: 0;
   image-rendering: pixelated;
 }
 
@@ -1483,6 +1485,7 @@ select,
   background-position: 0% 0%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
+  font-size: 0;
   overflow: hidden;
   image-rendering: pixelated;
 }
@@ -1494,6 +1497,7 @@ select,
   background-position: 0% 0%;
   animation: sprite-solve 2.4s steps(12) infinite;
   color: transparent;
+  font-size: 0;
   overflow: hidden;
   image-rendering: pixelated;
 }
