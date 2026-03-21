@@ -616,9 +616,12 @@ function init() {
     }
   });
 
-  // Click outside modal to close settings
+  // Click outside modal to close
   document.getElementById('settings-panel').addEventListener('click', (e) => {
     if (e.target.id === 'settings-panel') hideModal('settings-panel');
+  });
+  document.getElementById('celebration-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'celebration-modal') goAfterCelebration();
   });
 }
 
