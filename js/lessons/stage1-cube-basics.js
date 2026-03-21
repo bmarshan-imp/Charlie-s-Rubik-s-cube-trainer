@@ -135,34 +135,49 @@ const stage1 = {
       title: 'Your First Moves',
       coachIntro: {
         coach: 'feliks',
-        text: "Now for the fun part — making moves! Cubers have a simple language to write down moves. Each move is just one letter. Let me show you!",
+        text: "Now for the fun part — making moves! Every move just means: grab one side and turn it. The red arrows in the pictures show you which way to turn. Let me show you!",
       },
       steps: [
         {
-          text: "Every move **turns one face 90 degrees clockwise** (like turning a clock hand).\n\nWe name the move after the face:\n\n{R} = turn the **Right** face clockwise\n{U} = turn the **Up** face clockwise\n{F} = turn the **Front** face clockwise",
+          diagram: { type: 'moveArrow', moves: ['R'], size: 130 },
+          text: "**Right — follow the arrow!**\n\nHold your cube with [White] on top and [Red] facing you.\n\nGrab the [Blue] side (your right hand) and push the top of it **away from you**.\n\nThe red arrow shows the direction!",
         },
         {
-          text: "**What about the other direction?**\n\nAdd an apostrophe (we say \"prime\"):\n\n{R'} = turn Right face **counter-clockwise**\n{U'} = turn Up face **counter-clockwise**\n{F'} = turn Front face **counter-clockwise**\n\nThink of it as \"undo\" — {R} then {R'} puts everything back!",
+          diagram: { type: 'moveArrow', moves: ["R'"], size: 130 },
+          text: "**Right Undo — the arrow goes the other way!**\n\nSee the little mark after the R? That means **go backwards**.\n\nGrab the [Blue] side again and pull the top **toward you** this time.\n\nDo {R} then {R'} — everything goes back! They undo each other.",
         },
         {
-          text: "**All six basic moves:**\n\n{R} Right clockwise\n{L} Left clockwise\n{U} Up clockwise\n{D} Down clockwise\n{F} Front clockwise\n{B} Back clockwise\n\nAnd each one has a prime version: {R'} {L'} {U'} {D'} {F'} {B'}",
+          diagram: { type: 'moveArrow', moves: ['R', "R'"], size: 110 },
+          text: "**The big idea:**\n\nEvery move has a **do** and an **undo**.\n\nNo little mark = follow the arrow.\nLittle mark \u2032 = arrow goes the other way.\n\nTry {R} then {R'} a few times. See how they cancel out?",
         },
         {
-          text: "**Let's practice!**\n\nHold your cube with [White] on top and [Red] facing you.\n\nDo this move: {R}\n\nTurn the [Blue] (right) face clockwise — the top-right column goes toward you.",
+          diagram: { type: 'moveArrow', moves: ['U'], size: 130 },
+          text: "**Up — spin the top!**\n\nGrab the [White] top layer and spin it so the front row moves to the **left**.\n\nFollow the red arrow!",
         },
         {
-          text: "Now undo it: {R'}\n\nTurn the [Blue] (right) face counter-clockwise. Everything goes back!\n\n**Try it a few times.** {R} then {R'}. See how they cancel out?",
+          diagram: { type: 'moveArrow', moves: ["U'"], size: 130 },
+          text: "**Up Undo**\n\nSame top layer, but spin it the **other way** — front row moves to the right.\n\nAgain, {U} then {U'} puts it all back.",
         },
         {
-          text: "**Now try:** {U}\n\nTurn the [White] (top) face clockwise. The front row of the top goes to the right.\n\nUndo with: {U'}\n\nThe top row goes back.",
+          diagram: { type: 'moveArrow', moves: ['F'], size: 130 },
+          text: "**Front — twist the face looking at you!**\n\nGrab the [Red] front face and turn it like a steering wheel — top goes to the right.\n\nThe curvy arrow shows the spin direction!",
         },
         {
-          text: "**One more tip:**\n\nWhen you see moves written together like {R} {U} {R'} {U'}, just do them **one at a time, left to right**.\n\nThis particular sequence is super important — cubers call it a **trigger**. You'll use it a LOT!",
-          moves: ['R', "U", "R'", "U'"],
+          diagram: { type: 'moveArrow', moves: ["F'"], size: 130 },
+          text: "**Front Undo**\n\nSame front face, but steer the other way — top goes left.\n\n{F} then {F'} cancels out, just like the others!",
+        },
+        {
+          diagram: { type: 'moveArrow', moves: ['L', "L'", 'D', "D'", 'B', "B'"], size: 90 },
+          text: "**The other three sides work the same way!**\n\nEach picture shows you the arrow direction. The \u2032 version always goes the opposite way.\n\nYou don't need to memorise letters — just **follow the arrows** when you see them!",
+        },
+        {
+          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110 },
+          text: "**Your first combo!**\n\nDo these four moves **left to right**, one at a time. Follow each arrow!\n\nThis combo is super important — you'll use it a LOT later!",
+          moves: ['R', 'U', "R'", "U'"],
         },
       ],
       checkIn: {
-        text: "Try doing {R} {U} {R'} {U'} six times in a row. Your cube should return to the start! (It's like magic.)",
+        text: "Try doing {R} {U} {R'} {U'} six times in a row. Follow the arrows each time. Your cube should return to the start! (It's like magic.)",
       },
       celebration: "You can read and do cube moves! You're speaking the cuber's language now!",
     },

@@ -412,6 +412,13 @@ function renderDiagram(diag) {
       });
     }
 
+    if (diag.type === 'moveArrow') {
+      const moves = diag.moves || [];
+      return '<div class="move-arrow-row">' +
+        moves.map(m => renderMoveArrow(m, diag.size || 110)).join('') +
+        '</div>';
+    }
+
     if (diag.type === 'isometric') {
       const top = (diag.top || SOLVED_CUBE.U).map(c => COLORS[c] || c);
       const front = (diag.front || SOLVED_CUBE.F).map(c => COLORS[c] || c);
