@@ -473,15 +473,7 @@ input[type="submit"] {
 }
 
 .coach-bubble.coach-max .coach-avatar {
-  background: var(--coach-max);
-  background-image: url('../img/max-strip.png');
-  background-size: 873.6px 72.8px;
-  background-position: -10.4px -10.4px;
-  animation: sprite-solve 2.4s steps(12) infinite;
-  color: transparent;
-  font-size: 0;
-  overflow: hidden;
-  image-rendering: pixelated;
+  border: 2px solid var(--coach-max);
 }
 
 .coach-bubble.coach-max .coach-name {
@@ -495,15 +487,7 @@ input[type="submit"] {
 }
 
 .coach-bubble.coach-feliks .coach-avatar {
-  background: var(--coach-feliks);
-  background-image: url('../img/feliks-strip.png');
-  background-size: 873.6px 72.8px;
-  background-position: -10.4px -10.4px;
-  animation: sprite-solve 2.4s steps(12) infinite;
-  color: transparent;
-  font-size: 0;
-  overflow: hidden;
-  image-rendering: pixelated;
+  border: 2px solid var(--coach-feliks);
 }
 
 .coach-bubble.coach-feliks .coach-name {
@@ -517,15 +501,7 @@ input[type="submit"] {
 }
 
 .coach-bubble.coach-charlie .coach-avatar {
-  background: var(--coach-charlie);
-  background-image: url('../img/charlie-strip.png');
-  background-size: 1820px 72.8px;
-  background-position: -10.4px -10.4px;
-  animation: sprite-solve-charlie 5s steps(25) infinite;
-  color: transparent;
-  font-size: 0;
-  overflow: hidden;
-  image-rendering: pixelated;
+  border: 2px solid var(--coach-charlie);
 }
 
 .coach-bubble.coach-charlie .coach-name {
@@ -1498,69 +1474,8 @@ select,
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0;
-  font-weight: 700;
-  color: transparent;
-  overflow: hidden;
-}
-
-.coach-max-avatar {
-  background: var(--coach-max);
-  background-image: url('../img/max-strip.png');
-  background-size: 873.6px 72.8px;
-  background-position: -10.4px -10.4px;
-  animation: sprite-solve 2.4s steps(12) infinite;
-  color: transparent;
-  font-size: 0;
-  overflow: hidden;
+  object-fit: cover;
   image-rendering: pixelated;
-}
-
-.coach-feliks-avatar {
-  background: var(--coach-feliks);
-  background-image: url('../img/feliks-strip.png');
-  background-size: 873.6px 72.8px;
-  background-position: -10.4px -10.4px;
-  animation: sprite-solve 2.4s steps(12) infinite;
-  color: transparent;
-  font-size: 0;
-  overflow: hidden;
-  image-rendering: pixelated;
-}
-
-.coach-charlie-avatar {
-  background: var(--coach-charlie);
-  background-image: url('../img/charlie-strip.png');
-  background-size: 1820px 72.8px;
-  background-position: -10.4px -10.4px;
-  animation: sprite-solve-charlie 5s steps(25) infinite;
-  color: transparent;
-  font-size: 0;
-  overflow: hidden;
-  image-rendering: pixelated;
-}
-
-@keyframes sprite-solve {
-  from { background-position: -10.4px -10.4px; }
-  to   { background-position: -884px -10.4px; }
-}
-
-@keyframes sprite-solve-charlie {
-  from { background-position: -10.4px -10.4px; }
-  to   { background-position: -1830.4px -10.4px; }
-}
-
-/* Pause animation when not visible / reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .coach-max-avatar,
-  .coach-feliks-avatar,
-  .coach-charlie-avatar {
-    animation: none;
-    background-position: -10.4px -10.4px;
-  }
 }
 
 .welcome-coach-text {
@@ -1939,16 +1854,6 @@ select,
   line-height: var(--line-height);
 }
 
-/* Coach-specific colors for bubbles */
-.coach-max-avatar + .coach-message .coach-name,
-.coach-intro .coach-max-avatar ~ .coach-message .coach-name {
-  color: var(--coach-max);
-}
-
-.coach-feliks-avatar + .coach-message .coach-name,
-.coach-intro .coach-feliks-avatar ~ .coach-message .coach-name {
-  color: var(--coach-feliks);
-}
 
 /* Check-in boxes in lesson */
 .check-in-box {
@@ -2097,38 +2002,14 @@ select,
   overflow-y: auto;
 }
 
-.celebration-star {
-  font-size: 4rem;
-  margin-bottom: var(--sp-md);
-  animation: bounce 0.6s ease;
-}
-
 .celebration-charlie-sprite {
   width: 104px;
   height: 104px;
   margin: 0 auto var(--sp-md);
   border-radius: 50%;
-  background: var(--coach-charlie);
-  background-image: url('../img/charlie-strip.png');
-  background-size: 3640px 145.6px;
-  background-position: -20.8px -20.8px;
-  animation: sprite-solve-charlie-big 5s steps(25) infinite, bounce 0.6s ease;
+  object-fit: cover;
   image-rendering: pixelated;
-  overflow: hidden;
-  color: transparent;
-  font-size: 0;
-}
-
-@keyframes sprite-solve-charlie-big {
-  from { background-position: -20.8px -20.8px; }
-  to   { background-position: -3660.8px -20.8px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .celebration-charlie-sprite {
-    animation: none;
-    background-position: -20.8px -20.8px;
-  }
+  animation: bounce 0.6s ease;
 }
 
 .celebration-title {

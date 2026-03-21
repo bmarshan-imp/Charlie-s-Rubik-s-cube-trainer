@@ -215,13 +215,13 @@ function showCoachIntro(intro) {
   const text = document.getElementById('coach-intro-text');
 
   if (intro.coach === 'max') {
-    avatar.className = 'coach-avatar coach-max-avatar';
+    avatar.src = 'img/max.gif';
     name.textContent = 'Max Park says:';
   } else if (intro.coach === 'charlie') {
-    avatar.className = 'coach-avatar coach-charlie-avatar';
+    avatar.src = 'img/charlie.gif';
     name.textContent = 'Charlie says:';
   } else {
-    avatar.className = 'coach-avatar coach-feliks-avatar';
+    avatar.src = 'img/feliks.gif';
     name.textContent = 'Feliks Zemdegs says:';
   }
   text.textContent = intro.text;
@@ -358,13 +358,13 @@ function completeLessonAndCelebrate() {
     const coachText = document.getElementById('celebration-coach-text');
 
     if (outro.coach === 'max') {
-      avatar.className = 'coach-avatar coach-max-avatar';
+      avatar.src = 'img/max.gif';
       coachName.textContent = 'Max Park says:';
     } else if (outro.coach === 'charlie') {
-      avatar.className = 'coach-avatar coach-charlie-avatar';
+      avatar.src = 'img/charlie.gif';
       coachName.textContent = 'Charlie says:';
     } else {
-      avatar.className = 'coach-avatar coach-feliks-avatar';
+      avatar.src = 'img/feliks.gif';
       coachName.textContent = 'Feliks Zemdegs says:';
     }
     coachText.textContent = outro.text;
