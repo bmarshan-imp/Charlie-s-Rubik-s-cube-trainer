@@ -580,13 +580,32 @@ function renderMoveArrow(move, size = 100) {
   const faceSize = size - pad * 2;
   const cellSize = faceSize / 3;
 
-  // Light 3x3 grid background
+  // Map move to its face color and friendly name
+  const baseMove = move.replace("'", '');
+  const prime = move.includes("'");
+
+  const FACE_INFO = {
+    R: { color: COLORS.B,  name: 'Right' },
+    L: { color: COLORS.G,  name: 'Left' },
+    U: { color: COLORS.W,  name: 'Top' },
+    D: { color: COLORS.Y,  name: 'Bottom' },
+    F: { color: COLORS.R,  name: 'Front' },
+    B: { color: COLORS.O,  name: 'Back' },
+  };
+  const info = FACE_INFO[baseMove] || { color: '#ccc', name: baseMove };
+  const centerColor = info.color;
+  const friendlyName = info.name + (prime ? ' \u21A9' : '');
+
+  // Light 3x3 grid background with colored centre tile
   let grid = '';
   for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 3; c++) {
       const x = pad + c * cellSize;
       const y = pad + r * cellSize;
-      grid += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" ry="3" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>`;
+      const isCenter = (r === 1 && c === 1);
+      const fill = isCenter ? centerColor : '#f0f0f0';
+      const stroke = isCenter ? '#666' : '#ccc';
+      grid += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" ry="3" fill="${fill}" stroke="${stroke}" stroke-width="1"/>`;
     }
   }
 
@@ -612,9 +631,6 @@ function renderMoveArrow(move, size = 100) {
   let arrow = '';
   let highlight = '';
   const hlColor = 'rgba(230,57,70,0.15)';
-
-  const baseMove = move.replace("'", '');
-  const prime = move.includes("'");
 
   switch (baseMove) {
     case 'R': {
@@ -688,12 +704,12 @@ function renderMoveArrow(move, size = 100) {
       break;
   }
 
-  // Move label at bottom
-  const displayMove = move.replace("'", '\u2032');
-  const label = `<text x="${size / 2}" y="${size - 1}" text-anchor="middle" font-size="14" font-weight="bold" ` +
-    `font-family="Arial, sans-serif" fill="#333">${esc(displayMove)}</text>`;
+  // Friendly label at bottom (e.g. "Right" or "Right ↩")
+  const labelFontSize = Math.max(10, Math.min(14, size * 0.11));
+  const label = `<text x="${size / 2}" y="${size + 1}" text-anchor="middle" font-size="${labelFontSize}" font-weight="bold" ` +
+    `font-family="Arial, sans-serif" fill="#333">${esc(friendlyName)}</text>`;
 
-  const totalHeight = size + 6;
+  const totalHeight = size + 8;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${totalHeight}" ` +
     `width="${size}" height="${totalHeight}" role="img">${grid}${highlight}${arrow}${label}</svg>`;
 }
