@@ -1,7 +1,7 @@
 // Stage 1 — Know Your Cube
 // Teaches cube anatomy, face names, color scheme, and move notation.
 
-export const stage1 = {
+const stage1 = {
   id: 1,
   title: 'Know Your Cube',
   subtitle: 'Learn the pieces, faces, and how to talk about moves',

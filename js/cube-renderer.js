@@ -5,7 +5,7 @@
 // Color constants
 // ---------------------------------------------------------------------------
 
-export const COLORS = {
+const COLORS = {
   W: '#FFFFFF',  // white
   Y: '#FFD500',  // yellow
   R: '#B71234',  // red
@@ -15,7 +15,7 @@ export const COLORS = {
   X: '#808080',  // gray (don't care / any color)
 };
 
-export const COLOR_NAMES = {
+const COLOR_NAMES = {
   W: 'White',
   Y: 'Yellow',
   R: 'Red',
@@ -30,7 +30,7 @@ export const COLOR_NAMES = {
 // White top, Yellow bottom, Red front, Orange back, Green left, Blue right
 // ---------------------------------------------------------------------------
 
-export const SOLVED_CUBE = {
+const SOLVED_CUBE = {
   U: ['W','W','W','W','W','W','W','W','W'],
   D: ['Y','Y','Y','Y','Y','Y','Y','Y','Y'],
   F: ['R','R','R','R','R','R','R','R','R'],
@@ -43,7 +43,7 @@ export const SOLVED_CUBE = {
  * Create a cube state starting from solved, with selective overrides.
  * Null entries in an override array keep the solved colour.
  */
-export function makeState(overrides = {}) {
+function makeState(overrides = {}) {
   const st = {};
   for (const f of ['U','D','F','B','L','R']) {
     st[f] = [...SOLVED_CUBE[f]];
@@ -147,7 +147,7 @@ function stickerRect(x, y, w, h, colorCode, highlight, label) {
 // applyMove -- immutable, returns a new cube state
 // ---------------------------------------------------------------------------
 
-export function applyMove(cubeState, move) {
+function applyMove(cubeState, move) {
   const s = cloneCube(cubeState);
 
   switch (move) {
@@ -293,7 +293,7 @@ export function applyMove(cubeState, move) {
  * @param {boolean}  [options.showCenter=false] - Show a "C" on the center sticker.
  * @returns {string} Inline SVG markup.
  */
-export function renderFace(colors, options = {}) {
+function renderFace(colors, options = {}) {
   const size = options.size || 150;
   const highlights = new Set(options.highlights || []);
   const label = options.label || '';
@@ -344,7 +344,7 @@ const FACE_LABELS = {
  * @param {object} [options.highlights={}]   - { F: [0,1,2], U: [6,7,8], ... }
  * @returns {string} Inline SVG markup.
  */
-export function renderNet(faces, options = {}) {
+function renderNet(faces, options = {}) {
   const size = options.size || 120;
   const highlightsMap = options.highlights || {};
   const gap = 2;
@@ -412,7 +412,7 @@ export function renderNet(faces, options = {}) {
  * @param {object}   [options.highlights={}]      - { top: [], front: [], right: [] } or { U: [], F: [], R: [] }
  * @returns {string} Inline SVG markup.
  */
-export function renderIsometric(top, front, right, options = {}) {
+function renderIsometric(top, front, right, options = {}) {
   const s = options.size || 200;
   const highlightsMap = options.highlights || {};
   const gap = 2;
@@ -518,7 +518,7 @@ const FACE_BORDER_COLORS = {
  * @param {boolean}  [options.showCenter=false]
  * @returns {string} Inline SVG markup.
  */
-export function renderFaceOnly(faceColors, faceName, options = {}) {
+function renderFaceOnly(faceColors, faceName, options = {}) {
   const size = options.size || 160;
   const highlights = new Set(options.highlights || []);
   const showCenter = !!options.showCenter;
@@ -575,7 +575,7 @@ export function renderFaceOnly(faceColors, faceName, options = {}) {
  * @param {number} [size=100] - Pixel size of the diagram.
  * @returns {string} Inline SVG markup.
  */
-export function renderMoveArrow(move, size = 100) {
+function renderMoveArrow(move, size = 100) {
   const pad = 8;
   const faceSize = size - pad * 2;
   const cellSize = faceSize / 3;

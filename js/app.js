@@ -3,8 +3,8 @@
  * Handles navigation, rendering, progress tracking, and UI state.
  */
 
-import { STAGES } from './lessons/index.js';
-import { renderFace, renderNet, renderIsometric, COLORS, SOLVED_CUBE, makeState } from './cube-renderer.js';
+// Dependencies (STAGES, COLORS, SOLVED_CUBE, renderFace, renderNet, renderIsometric, makeState)
+// are loaded via script tags before this file.
 
 // ─── State ───────────────────────────────────────────────────────
 const STORAGE_KEY = 'charlie_cube_progress';

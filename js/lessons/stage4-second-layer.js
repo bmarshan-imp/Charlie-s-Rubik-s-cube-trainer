@@ -1,7 +1,7 @@
 // Stage 4 — Second Layer
 // Insert the four middle-layer edge pieces.
 
-export const stage4 = {
+const stage4 = {
   id: 4,
   title: 'Second Layer',
   subtitle: 'Solve the middle edges',

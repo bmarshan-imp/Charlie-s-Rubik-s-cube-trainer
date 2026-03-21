@@ -1,7 +1,7 @@
 // Stage 5 — Yellow Cross
 // Orient the yellow edges to form a cross on top.
 
-export const stage5 = {
+const stage5 = {
   id: 5,
   title: 'Yellow Cross',
   subtitle: 'Make a yellow plus sign on top',
