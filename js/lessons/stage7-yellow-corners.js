@@ -46,7 +46,7 @@ const stage7 = {
       },
       steps: [
         {
-          diagram: { type: 'moveArrow', moves: ['U', 'R', "U'", "L'", 'U', "R'", "U'", 'L'], size: 80 },
+          diagram: { type: 'moveArrow', moves: ['U', 'R', "U'", "L'", 'U', "R'", "U'", 'L'], size: 80, orientation: 'yellowTop' },
           text: "**The corner-swap algorithm:**\n\nThis keeps the **front-right** corner in place and shuffles the other three.\n\nSo always put your correct corner at front-right!",
           moves: ['U', 'R', "U'", "L'", 'U', "R'", "U'", 'L'],
         },

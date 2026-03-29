@@ -68,7 +68,7 @@ const stage5 = {
       },
       steps: [
         {
-          diagram: { type: 'moveArrow', moves: ['F', 'R', 'U', "R'", "U'", "F'"], size: 90 },
+          diagram: { type: 'moveArrow', moves: ['F', 'R', 'U', "R'", "U'", "F'"], size: 90, orientation: 'yellowTop' },
           text: "**The algorithm:**\n\nSay it in rhythm: **Front, Right, Up, Right-back, Up-back, Front-back.**\n\nNotice the trigger hiding inside!",
           moves: ['F', 'R', 'U', "R'", "U'", "F'"],
         },

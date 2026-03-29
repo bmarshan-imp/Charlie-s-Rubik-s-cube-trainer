@@ -60,7 +60,7 @@ const stage6 = {
       },
       steps: [
         {
-          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", 'U', 'R', "U'", "U'", "R'"], size: 80 },
+          diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", 'U', 'R', "U'", "U'", "R'"], size: 80, orientation: 'yellowTop' },
           text: "**The Sune algorithm:**\n\nBreak it down:\n• Trigger start, then an extra up turn\n• Finish with double up-back\n\nFollow the arrows!",
           moves: ['R', 'U', "R'", 'U', 'R', "U'", "U'", "R'"],
         },
