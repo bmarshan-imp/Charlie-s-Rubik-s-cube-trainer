@@ -46,7 +46,7 @@ const stage4 = {
           text: "**Setup:** Find a non-yellow edge on top. Turn {U} until its **front sticker matches the center** below it.\n\nNow look at the edge's **top sticker**. Does it match the center on the **right** or the **left**?",
         },
         {
-          diagram: { type: 'moveArrow', moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F'], size: 80 },
+          diagram: { type: 'moveArrow', moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F'], size: 80, orientation: 'yellowTop' },
           text: "**If the top color matches the RIGHT center:**\n\nWe push the edge to the right using this sequence.\n\n**Part 1:** move edge away\n**Part 2:** tuck it in\n\nLet's break it down!",
           moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F'],
         },
@@ -54,7 +54,7 @@ const stage4 = {
           text: "**Think of it in two parts:**\n\n**Part 1:** {U} {R} {U'} {R'}\nThis moves the edge out of the way and opens a slot.\n\n**Part 2:** {U'} {F'} {U} {F}\nThis tucks the edge into the slot from the right.\n\nTogether they smoothly slide the edge into the middle layer!",
         },
         {
-          diagram: { type: 'moveArrow', moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F'], size: 80 },
+          diagram: { type: 'moveArrow', moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F'], size: 80, orientation: 'yellowTop' },
           text: "**Try it step by step:**\n\n1. Line up the front color with the front center\n2. Check that the top color matches the right center\n3. Follow the arrows left to right!\n4. The edge should be in place!",
           moves: ['U', 'R', "U'", "R'", "U'", "F'", 'U', 'F'],
         },
@@ -75,7 +75,7 @@ const stage4 = {
       },
       steps: [
         {
-          diagram: { type: 'moveArrow', moves: ["U'", "L'", 'U', 'L', 'U', 'F', "U'", "F'"], size: 80 },
+          diagram: { type: 'moveArrow', moves: ["U'", "L'", 'U', 'L', 'U', 'F', "U'", "F'"], size: 80, orientation: 'yellowTop' },
           text: "**If the top color matches the LEFT center:**\n\nWe push the edge to the left — follow the arrows!",
           moves: ["U'", "L'", 'U', 'L', 'U', 'F', "U'", "F'"],
         },

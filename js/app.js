@@ -416,8 +416,10 @@ function renderDiagram(diag) {
 
     if (diag.type === 'moveArrow') {
       const moves = diag.moves || [];
+      const arrowOpts = {};
+      if (diag.orientation) arrowOpts.orientation = diag.orientation;
       return '<div class="move-arrow-row">' +
-        moves.map(m => renderMoveArrow(m, diag.size || 110)).join('') +
+        moves.map(m => renderMoveArrow(m, diag.size || 110, arrowOpts)).join('') +
         '</div>';
     }
 

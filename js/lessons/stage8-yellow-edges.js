@@ -43,12 +43,12 @@ const stage8 = {
       },
       steps: [
         {
-          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70 },
+          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70, orientation: 'yellowTop' },
           text: "**Clockwise cycle** (front edge needs to go right):\n\nThat's a lot of moves! Let's break it down.",
           moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'],
         },
         {
-          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70 },
+          diagram: { type: 'moveArrow', moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'], size: 70, orientation: 'yellowTop' },
           text: "**Break it into chunks:**\n\nStart, go up, go up again, turn back, reverse, double finish.\n\nPractice it slowly — it's just R and U moves!",
           moves: ['R', "U'", 'R', 'U', 'R', 'U', 'R', "U'", "R'", "U'", 'R2'],
         },

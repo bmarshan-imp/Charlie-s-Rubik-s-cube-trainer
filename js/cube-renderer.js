@@ -573,9 +573,11 @@ function renderFaceOnly(faceColors, faceName, options = {}) {
  *
  * @param {string} move - e.g. 'R', "R'", 'U', "U'", 'F', "F'", etc.
  * @param {number} [size=100] - Pixel size of the diagram.
+ * @param {Object} [options] - Optional settings.
+ * @param {string} [options.orientation] - 'yellowTop' swaps U/D face colors.
  * @returns {string} Inline SVG markup.
  */
-function renderMoveArrow(move, size = 100) {
+function renderMoveArrow(move, size = 100, options = {}) {
   const pad = 8;
   const faceSize = size - pad * 2;
   const cellSize = faceSize / 3;
@@ -585,11 +587,13 @@ function renderMoveArrow(move, size = 100) {
   const prime = move.includes("'");
   const double = move.includes('2');
 
+  const topColor = options.orientation === 'yellowTop' ? COLORS.Y : COLORS.W;
+  const botColor = options.orientation === 'yellowTop' ? COLORS.W : COLORS.Y;
   const FACE_INFO = {
     R: { color: COLORS.B,  name: 'Right' },
     L: { color: COLORS.G,  name: 'Left' },
-    U: { color: COLORS.W,  name: 'Top' },
-    D: { color: COLORS.Y,  name: 'Bottom' },
+    U: { color: topColor,  name: 'Top' },
+    D: { color: botColor,  name: 'Bottom' },
     F: { color: COLORS.R,  name: 'Front' },
     B: { color: COLORS.O,  name: 'Back' },
   };
