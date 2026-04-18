@@ -75,14 +75,14 @@ const stage3 = {
       },
       steps: [
         {
-          text: "**Setup:** Flip your cube so [White] is on the **bottom** and [Yellow] is on top.\n\nFind a white corner in the **top layer**. Turn the top ({U}) to position that corner so it's at the **front-left** — the spot where its non-white colors match the front and right centers.",
+          text: "**Setup:** Flip your cube so [White] is on the **bottom** and [Yellow] is on top.\n\nFind a white corner in the **top layer**. Turn the top ({U}) to position that corner so it's at the **front-right** — directly above its home slot, with its non-white colors matching the front and right centers.",
         },
         {
-          text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces the **left** side\n2. White faces **up**\n3. White faces **toward you** (front)\n\nEach case needs a different number of triggers.",
+          text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces the **right** side\n2. White faces **up**\n3. White faces **toward you** (front)\n\nEach case needs a different number of triggers.",
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110, orientation: 'yellowTop' },
-          text: "**Case 1: White faces the left side**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner drops right into place with white on the bottom!",
+          text: "**Case 1: White faces the right side**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner drops right into place with white on the bottom!",
           moves: ['R', 'U', "R'", "U'"],
         },
         {
@@ -96,10 +96,10 @@ const stage3 = {
           moves: ['R', 'U', "R'", "U'", '×5'],
         },
         {
-          text: "**What if a white corner is already on the bottom but wrong?**\n\nHold that corner in the front-right position and do the trigger once. It will pop out to the top layer.\n\nThen use {U} to position it at the front-left, and insert it using the cases above.",
+          text: "**What if a white corner is already on the bottom but wrong?**\n\nHold that corner in the front-right position and do the trigger once. It will pop out to the top layer.\n\nThen use {U} to position it at the front-right above its home, and insert it using the cases above.",
         },
         {
-          text: "**The full process:**\n\n1. Find a white corner (check the top layer)\n2. Use {U} to put it at the front-left, matching the front and right centers\n3. Hold the home slot at front-right on the bottom\n4. Do the trigger until white is on the bottom\n5. Repeat for all four corners!\n\nTake your time — this is the hardest part of Stage 3.",
+          text: "**The full process:**\n\n1. Find a white corner (check the top layer)\n2. Use {U} to put it at the front-right, matching the front and right centers\n3. The home slot is right below it — front-right on the bottom\n4. Do the trigger until white is on the bottom\n5. Repeat for all four corners!\n\nTake your time — this is the hardest part of Stage 3.",
         },
       ],
       checkIn: {
