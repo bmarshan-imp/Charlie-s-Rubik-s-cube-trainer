@@ -8,8 +8,17 @@
 
 // ─── State ───────────────────────────────────────────────────────
 const STORAGE_KEY = 'charlie_cube_progress';
+const CUBE_TYPES = ['3x3', '2x2'];
 
-let state = loadProgress();
+// `state` holds the *currently active* cube-type's progress.
+// Progress for both cube types lives in `allProgress[cubeType]`.
+// The wrapper on disk looks like:
+//   { cubeType: '3x3', progress: { '3x3': {...}, '2x2': {...} }, lastVisit }
+let allProgress = loadAllProgress();
+let activeCubeType = allProgress.cubeType || '3x3';
+let state = allProgress.progress[activeCubeType];
+// Point STAGES at the correct course for the active cube type.
+STAGES = activeCubeType === '2x2' ? STAGES_2X2 : STAGES_3X3;
 
 function defaultProgress() {
   return {
@@ -18,32 +27,78 @@ function defaultProgress() {
     currentStep: -1, // -1 = coach intro (if any), 0+ = step index
     completedLessons: [],
     adultCheckIns: {},
+  };
+}
+
+function defaultAllProgress() {
+  return {
+    cubeType: '3x3',
+    progress: {
+      '3x3': defaultProgress(),
+      '2x2': defaultProgress(),
+    },
     lastVisit: new Date().toISOString(),
   };
 }
 
-function loadProgress() {
+function loadAllProgress() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      // Ensure all fields exist (in case we add new ones)
-      return { ...defaultProgress(), ...parsed };
+      // Legacy format: single progress object with currentStage etc. at top level.
+      // Migrate it into the 3x3 slot.
+      if (parsed && parsed.progress && parsed.cubeType) {
+        const out = defaultAllProgress();
+        out.cubeType = CUBE_TYPES.includes(parsed.cubeType) ? parsed.cubeType : '3x3';
+        for (const t of CUBE_TYPES) {
+          out.progress[t] = { ...defaultProgress(), ...(parsed.progress[t] || {}) };
+        }
+        return out;
+      }
+      if (parsed && (parsed.completedLessons || parsed.currentStage !== undefined)) {
+        const out = defaultAllProgress();
+        out.progress['3x3'] = { ...defaultProgress(), ...parsed };
+        out.cubeType = '3x3';
+        return out;
+      }
     }
   } catch (e) { /* ignore */ }
-  return defaultProgress();
+  return defaultAllProgress();
 }
 
 function saveProgress() {
-  state.lastVisit = new Date().toISOString();
+  allProgress.cubeType = activeCubeType;
+  allProgress.progress[activeCubeType] = state;
+  allProgress.lastVisit = new Date().toISOString();
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allProgress));
   } catch (e) { /* ignore */ }
 }
 
 function resetProgress() {
-  state = defaultProgress();
+  allProgress = defaultAllProgress();
+  activeCubeType = '3x3';
+  state = allProgress.progress[activeCubeType];
+  STAGES = STAGES_3X3;
   saveProgress();
+}
+
+function setCubeType(type) {
+  if (!CUBE_TYPES.includes(type)) return;
+  // Save any in-flight state back to the previous slot first.
+  allProgress.progress[activeCubeType] = state;
+  activeCubeType = type;
+  state = allProgress.progress[type];
+  STAGES = type === '2x2' ? STAGES_2X2 : STAGES_3X3;
+  saveProgress();
+}
+
+function hasProgressForAnyCube() {
+  return CUBE_TYPES.some(t =>
+    (allProgress.progress[t] && allProgress.progress[t].completedLessons &&
+      allProgress.progress[t].completedLessons.length > 0)
+  );
 }
 
 function isLessonCompleted(lessonId) {
@@ -91,10 +146,14 @@ function hideModal(modalId) {
 
 // ─── Welcome Screen ──────────────────────────────────────────────
 function initWelcome() {
-  // Show continue button if there's saved progress
+  // Show continue button if there's saved progress on either cube
   const btnContinue = document.getElementById('btn-continue');
-  const hasProgress = state.completedLessons.length > 0;
-  btnContinue.style.display = hasProgress ? 'block' : 'none';
+  const showContinue = hasProgressForAnyCube();
+  btnContinue.style.display = showContinue ? 'block' : 'none';
+  if (showContinue) {
+    const t = activeCubeType === '2x2' ? '2×2' : '3×3';
+    btnContinue.textContent = `Continue My ${t} Journey`;
+  }
 
   // Render a little cube on the welcome screen
   const cubeArt = document.getElementById('welcome-cube-art');
@@ -106,8 +165,22 @@ function initWelcome() {
   }
 }
 
+function startCubeJourney(cubeType) {
+  setCubeType(cubeType);
+  showScreen('stage-map');
+  renderStageMap();
+}
+
 // ─── Stage Map ───────────────────────────────────────────────────
 function renderStageMap() {
+  // Update map title based on cube type
+  const titleEl = document.querySelector('.stage-map-title');
+  if (titleEl) {
+    const label = activeCubeType === '2x2' ? '2×2' : '3×3';
+    titleEl.innerHTML =
+      `Your Cube Journey <span class="cube-type-badge">${label}</span>`;
+  }
+
   const container = document.getElementById('stage-map-path');
   container.innerHTML = '';
 
@@ -391,22 +464,36 @@ function updateProgressBar() {
 function renderDiagram(diag) {
   if (!diag || diag.type === 'none') return '';
 
+  // Diagram-level cubeSize takes priority; otherwise fall back to active cube.
+  const cubeSize = diag.cubeSize || (activeCubeType === '2x2' ? 2 : 3);
+  const is2x2 = cubeSize === 2;
+  const solved = is2x2 ? SOLVED_CUBE_2X2 : SOLVED_CUBE;
+
   try {
     if (diag.type === 'net') {
       if (diag.state === 'solved') {
-        return renderNet(SOLVED_CUBE, { size: 60, highlights: diag.highlights || {} });
+        return is2x2
+          ? renderNet2x2(solved, { size: 90, highlights: diag.highlights || {} })
+          : renderNet(solved, { size: 60, highlights: diag.highlights || {} });
       } else if (diag.state === 'custom' && diag.faces) {
-        // Build full cube state, filling missing faces from solved
         const faces = {};
         for (const f of ['U', 'D', 'F', 'B', 'L', 'R']) {
-          faces[f] = diag.faces[f] || SOLVED_CUBE[f];
+          faces[f] = diag.faces[f] || solved[f];
         }
-        return renderNet(faces, { size: 60, highlights: diag.highlights || {} });
+        return is2x2
+          ? renderNet2x2(faces, { size: 90, highlights: diag.highlights || {} })
+          : renderNet(faces, { size: 60, highlights: diag.highlights || {} });
       }
     }
 
     if (diag.type === 'face') {
       const colors = (diag.colors || []).map(c => COLORS[c] || c);
+      if (is2x2) {
+        return renderFace2x2(colors, {
+          size: 150,
+          highlights: diag.highlights || [],
+        });
+      }
       return renderFace(colors, {
         size: 150,
         highlights: diag.highlights || [],
@@ -418,15 +505,22 @@ function renderDiagram(diag) {
       const moves = diag.moves || [];
       const arrowOpts = {};
       if (diag.orientation) arrowOpts.orientation = diag.orientation;
+      const render = is2x2 ? renderMoveArrow2x2 : renderMoveArrow;
       return '<div class="move-arrow-row">' +
-        moves.map(m => renderMoveArrow(m, diag.size || 110, arrowOpts)).join('') +
+        moves.map(m => render(m, diag.size || 110, arrowOpts)).join('') +
         '</div>';
     }
 
     if (diag.type === 'isometric') {
-      const top = (diag.top || SOLVED_CUBE.U).map(c => COLORS[c] || c);
-      const front = (diag.front || SOLVED_CUBE.F).map(c => COLORS[c] || c);
-      const right = (diag.right || SOLVED_CUBE.R).map(c => COLORS[c] || c);
+      const top = (diag.top || solved.U).map(c => COLORS[c] || c);
+      const front = (diag.front || solved.F).map(c => COLORS[c] || c);
+      const right = (diag.right || solved.R).map(c => COLORS[c] || c);
+      if (is2x2) {
+        return renderIsometric2x2(top, front, right, {
+          size: 140,
+          highlights: diag.highlights || {},
+        });
+      }
       return renderIsometric(top, front, right, {
         size: 90,
         highlights: diag.highlights || {},
@@ -550,12 +644,14 @@ function init() {
   loadFontSize();
   initWelcome();
 
-  // Welcome screen buttons
-  document.getElementById('btn-start').addEventListener('click', () => {
-    showScreen('stage-map');
-    renderStageMap();
-  });
+  // Welcome screen buttons — one per cube type
+  const btn3x3 = document.getElementById('btn-start-3x3');
+  const btn2x2 = document.getElementById('btn-start-2x2');
+  if (btn3x3) btn3x3.addEventListener('click', () => startCubeJourney('3x3'));
+  if (btn2x2) btn2x2.addEventListener('click', () => startCubeJourney('2x2'));
+
   document.getElementById('btn-continue').addEventListener('click', () => {
+    // Keep the current active cube type; just jump into the stage map.
     showScreen('stage-map');
     renderStageMap();
   });

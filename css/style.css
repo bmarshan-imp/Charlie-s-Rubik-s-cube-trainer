@@ -177,6 +177,89 @@ input[type="submit"] {
   margin-bottom: var(--sp-xl);
 }
 
+/* --- Cube picker (choose 3x3 or 2x2) --- */
+.cube-picker {
+  width: 100%;
+  max-width: 640px;
+  margin: var(--sp-md) 0 var(--sp-lg);
+}
+
+.cube-picker-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: var(--sp-md);
+}
+
+.cube-picker-buttons {
+  display: flex;
+  gap: var(--sp-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-cube-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--sp-xs);
+  padding: var(--sp-md) var(--sp-lg);
+  min-width: 200px;
+  min-height: 180px;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--border);
+  background: #FFFFFF;
+  color: var(--text);
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 10px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.btn-cube-choice:hover,
+.btn-cube-choice:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px var(--shadow-lg);
+  border-color: var(--btn-primary);
+}
+
+.cube-choice-icon {
+  font-size: 1rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+  margin-bottom: var(--sp-xs);
+}
+
+.cube-choice-icon-2x2 {
+  font-size: 1.4rem;
+}
+
+.cube-choice-label {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.cube-choice-sub {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  text-align: center;
+  max-width: 180px;
+}
+
+/* --- Cube-type badge on stage map --- */
+.cube-type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  margin-left: var(--sp-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  background: var(--btn-primary);
+  color: #fff;
+  vertical-align: middle;
+}
+
 /* ==========================================================================
    2. Stage Map
    ========================================================================== */

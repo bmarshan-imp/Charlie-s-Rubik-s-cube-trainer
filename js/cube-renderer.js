@@ -718,3 +718,312 @@ function renderMoveArrow(move, size = 100, options = {}) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${totalHeight}" ` +
     `width="${size}" height="${totalHeight}" role="img">${grid}${highlight}${arrow}${label}</svg>`;
 }
+
+// ===========================================================================
+// 2x2 CUBE RENDERERS
+// ===========================================================================
+
+const SOLVED_CUBE_2X2 = {
+  U: ['W','W','W','W'],
+  D: ['Y','Y','Y','Y'],
+  F: ['R','R','R','R'],
+  B: ['O','O','O','O'],
+  L: ['G','G','G','G'],
+  R: ['B','B','B','B'],
+};
+
+function makeState2x2(overrides = {}) {
+  const st = {};
+  for (const f of ['U','D','F','B','L','R']) {
+    st[f] = [...SOLVED_CUBE_2X2[f]];
+  }
+  for (const face of Object.keys(overrides)) {
+    if (!st[face]) continue;
+    const arr = overrides[face];
+    if (!Array.isArray(arr)) continue;
+    for (let i = 0; i < 4; i++) {
+      if (i < arr.length && arr[i] != null) {
+        st[face][i] = arr[i];
+      }
+    }
+  }
+  return st;
+}
+
+/** Render a single 2x2 face (4 stickers). */
+function renderFace2x2(colors, options = {}) {
+  const size = options.size || 150;
+  const highlights = new Set(options.highlights || []);
+  const label = options.label || '';
+  const gap = 3;
+  const cellSize = (size - 3 * gap) / 2;
+
+  let inner = '';
+  for (let i = 0; i < 4; i++) {
+    const row = Math.floor(i / 2);
+    const col = i % 2;
+    const x = gap + col * (cellSize + gap);
+    const y = gap + row * (cellSize + gap);
+    inner += stickerRect(x, y, cellSize, cellSize, colors[i], highlights.has(i), '');
+  }
+
+  const labelHeight = label ? 22 : 0;
+  const totalHeight = size + labelHeight;
+
+  if (label) {
+    inner += `<text class="cube-face-label" x="${size / 2}" y="${size + 16}" text-anchor="middle" ` +
+      `font-size="13" font-family="Arial, sans-serif" fill="#555">${esc(label)}</text>`;
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${totalHeight}" ` +
+    `width="${size}" height="${totalHeight}" role="img">${inner}</svg>`;
+}
+
+/** Render the full unfolded 2x2 cube net. */
+function renderNet2x2(faces, options = {}) {
+  const size = options.size || 110;
+  const highlightsMap = options.highlights || {};
+  const gap = 3;
+  const cellSize = (size - 3 * gap) / 2;
+  const spacing = 6;
+  const labelHeight = 18;
+
+  const layout = {
+    U: { col: 1, row: 0 },
+    L: { col: 0, row: 1 },
+    F: { col: 1, row: 1 },
+    R: { col: 2, row: 1 },
+    B: { col: 3, row: 1 },
+    D: { col: 1, row: 2 },
+  };
+
+  const totalW = 4 * size + 5 * spacing;
+  const totalH = 3 * (size + labelHeight) + 4 * spacing;
+
+  let inner = '';
+
+  for (const [faceKey, pos] of Object.entries(layout)) {
+    const colors = faces[faceKey];
+    if (!colors) continue;
+    const faceHighlights = new Set(highlightsMap[faceKey] || []);
+
+    const ox = spacing + pos.col * (size + spacing);
+    const oy = spacing + pos.row * (size + labelHeight + spacing);
+
+    inner += `<rect x="${ox}" y="${oy}" width="${size}" height="${size}" rx="2" ry="2" fill="#222" stroke="none"/>`;
+
+    for (let i = 0; i < 4; i++) {
+      const row = Math.floor(i / 2);
+      const col = i % 2;
+      const x = ox + gap + col * (cellSize + gap);
+      const y = oy + gap + row * (cellSize + gap);
+      inner += stickerRect(x, y, cellSize, cellSize, colors[i], faceHighlights.has(i), '');
+    }
+
+    const lx = ox + size / 2;
+    const ly = oy + size + labelHeight - 4;
+    inner += `<text class="cube-face-label" x="${lx}" y="${ly}" text-anchor="middle" ` +
+      `font-size="12" font-family="Arial, sans-serif" fill="#555">${esc(FACE_LABELS[faceKey] || faceKey)}</text>`;
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW} ${totalH}" ` +
+    `width="${totalW}" height="${totalH}" role="img">${inner}</svg>`;
+}
+
+/** Render a pseudo-3D isometric 2x2 cube. */
+function renderIsometric2x2(top, front, right, options = {}) {
+  const s = options.size || 180;
+  const highlightsMap = options.highlights || {};
+  const gap = 3;
+  const cell = (s - 3 * gap) / 2;
+
+  const skewX = s * 0.5;
+  const skewY = s * 0.3;
+  const vw = s + skewX + 10;
+  const vh = s + skewY + 10;
+
+  const frontOx = 5;
+  const frontOy = skewY + 5;
+  const rightOx = s + 5;
+  const rightOy = skewY + 5;
+
+  let inner = '';
+
+  const frontHighlights = new Set(highlightsMap.front || highlightsMap.F || []);
+  inner += `<g>`;
+  inner += `<rect x="${frontOx}" y="${frontOy}" width="${s}" height="${s}" fill="#222" rx="2"/>`;
+  for (let r = 0; r < 2; r++) {
+    for (let c = 0; c < 2; c++) {
+      const idx = r * 2 + c;
+      const x = frontOx + gap + c * (cell + gap);
+      const y = frontOy + gap + r * (cell + gap);
+      inner += stickerRect(x, y, cell, cell, front[idx], frontHighlights.has(idx), '');
+    }
+  }
+  inner += `</g>`;
+
+  const a1 = 1, b1 = 0;
+  const c1 = -skewX / s, d1 = skewY / s;
+  const e1 = frontOx + skewX, f1 = frontOy - skewY;
+
+  const topHighlights = new Set(highlightsMap.top || highlightsMap.U || []);
+  inner += `<g transform="matrix(${a1},${b1},${c1},${d1},${e1},${f1})">`;
+  inner += `<rect x="0" y="0" width="${s}" height="${s}" fill="#222" rx="2"/>`;
+  for (let r = 0; r < 2; r++) {
+    for (let c = 0; c < 2; c++) {
+      const idx = r * 2 + c;
+      const x = gap + c * (cell + gap);
+      const y = gap + r * (cell + gap);
+      inner += stickerRect(x, y, cell, cell, top[idx], topHighlights.has(idx), '');
+    }
+  }
+  inner += `</g>`;
+
+  const a2 = skewX / s, b2 = -skewY / s;
+  const c2 = 0, d2 = 1;
+  const e2 = rightOx, f2 = rightOy;
+
+  const rightHighlights = new Set(highlightsMap.right || highlightsMap.R || []);
+  inner += `<g transform="matrix(${a2},${b2},${c2},${d2},${e2},${f2})">`;
+  inner += `<rect x="0" y="0" width="${s}" height="${s}" fill="#222" rx="2"/>`;
+  for (let r = 0; r < 2; r++) {
+    for (let c = 0; c < 2; c++) {
+      const idx = r * 2 + c;
+      const x = gap + c * (cell + gap);
+      const y = gap + r * (cell + gap);
+      inner += stickerRect(x, y, cell, cell, right[idx], rightHighlights.has(idx), '');
+    }
+  }
+  inner += `</g>`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" ` +
+    `width="${vw}" height="${vh}" role="img">${inner}</svg>`;
+}
+
+/** Render a move-arrow diagram on a 2x2 grid background. */
+function renderMoveArrow2x2(move, size = 110, options = {}) {
+  const pad = 8;
+  const faceSize = size - pad * 2;
+  const cellSize = faceSize / 2;
+
+  const baseMove = move.replace("'", '').replace('2', '');
+  const prime = move.includes("'");
+  const double = move.includes('2');
+
+  const topColor = options.orientation === 'yellowTop' ? COLORS.Y : COLORS.W;
+  const botColor = options.orientation === 'yellowTop' ? COLORS.W : COLORS.Y;
+  const FACE_INFO = {
+    R: { color: COLORS.B,  name: 'Right' },
+    L: { color: COLORS.G,  name: 'Left' },
+    U: { color: topColor,  name: 'Top' },
+    D: { color: botColor,  name: 'Bottom' },
+    F: { color: COLORS.R,  name: 'Front' },
+    B: { color: COLORS.O,  name: 'Back' },
+  };
+  const info = FACE_INFO[baseMove] || { color: '#ccc', name: baseMove };
+  const friendlyName = info.name + (prime ? ' \u21A9' : double ? ' ×2' : '');
+
+  // Build 2x2 grid background (all face color)
+  let grid = '';
+  for (let r = 0; r < 2; r++) {
+    for (let c = 0; c < 2; c++) {
+      const x = pad + c * cellSize;
+      const y = pad + r * cellSize;
+      grid += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="3" ry="3" ` +
+        `fill="${info.color}" stroke="#666" stroke-width="1"/>`;
+    }
+  }
+
+  const arrowColor = '#E63946';
+  const arrowWidth = 3;
+  const headSize = 8;
+  const hlColor = 'rgba(230,57,70,0.18)';
+
+  function arrowLine(x1, y1, x2, y2) {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const ux = dx / len;
+    const uy = dy / len;
+    const px = -uy;
+    const py = ux;
+    const baseX = x2 - ux * headSize;
+    const baseY = y2 - uy * headSize;
+    return `<line x1="${x1}" y1="${y1}" x2="${baseX}" y2="${baseY}" stroke="${arrowColor}" stroke-width="${arrowWidth}" stroke-linecap="round"/>` +
+      `<polygon points="${x2},${y2} ${baseX + px * headSize * 0.5},${baseY + py * headSize * 0.5} ${baseX - px * headSize * 0.5},${baseY - py * headSize * 0.5}" fill="${arrowColor}"/>`;
+  }
+
+  let arrow = '';
+  let highlight = '';
+
+  switch (baseMove) {
+    case 'R': {
+      const cx = pad + 1.5 * cellSize;
+      const topY = pad + 4;
+      const botY = pad + faceSize - 4;
+      highlight = `<rect x="${pad + cellSize}" y="${pad}" width="${cellSize}" height="${faceSize}" fill="${hlColor}" rx="3"/>`;
+      arrow = prime ? arrowLine(cx, topY, cx, botY) : arrowLine(cx, botY, cx, topY);
+      break;
+    }
+    case 'L': {
+      const cx = pad + 0.5 * cellSize;
+      const topY = pad + 4;
+      const botY = pad + faceSize - 4;
+      highlight = `<rect x="${pad}" y="${pad}" width="${cellSize}" height="${faceSize}" fill="${hlColor}" rx="3"/>`;
+      arrow = prime ? arrowLine(cx, botY, cx, topY) : arrowLine(cx, topY, cx, botY);
+      break;
+    }
+    case 'U': {
+      const cy = pad + 0.5 * cellSize;
+      const leftX = pad + 4;
+      const rightX = pad + faceSize - 4;
+      highlight = `<rect x="${pad}" y="${pad}" width="${faceSize}" height="${cellSize}" fill="${hlColor}" rx="3"/>`;
+      arrow = prime ? arrowLine(leftX, cy, rightX, cy) : arrowLine(rightX, cy, leftX, cy);
+      break;
+    }
+    case 'D': {
+      const cy = pad + 1.5 * cellSize;
+      const leftX = pad + 4;
+      const rightX = pad + faceSize - 4;
+      highlight = `<rect x="${pad}" y="${pad + cellSize}" width="${faceSize}" height="${cellSize}" fill="${hlColor}" rx="3"/>`;
+      arrow = prime ? arrowLine(rightX, cy, leftX, cy) : arrowLine(leftX, cy, rightX, cy);
+      break;
+    }
+    case 'F': {
+      const cx = size / 2;
+      const cy = size / 2;
+      const r = faceSize * 0.32;
+      if (!prime) {
+        arrow = `<path d="M ${cx} ${cy - r} A ${r} ${r} 0 1 1 ${cx - r} ${cy}" fill="none" stroke="${arrowColor}" stroke-width="${arrowWidth}" stroke-linecap="round"/>`;
+        arrow += `<polygon points="${cx - r},${cy} ${cx - r - 5},${cy - 7} ${cx - r + 5},${cy - 7}" fill="${arrowColor}"/>`;
+      } else {
+        arrow = `<path d="M ${cx} ${cy - r} A ${r} ${r} 0 1 0 ${cx + r} ${cy}" fill="none" stroke="${arrowColor}" stroke-width="${arrowWidth}" stroke-linecap="round"/>`;
+        arrow += `<polygon points="${cx + r},${cy} ${cx + r - 5},${cy - 7} ${cx + r + 5},${cy - 7}" fill="${arrowColor}"/>`;
+      }
+      break;
+    }
+    case 'B': {
+      const cx = size / 2;
+      const cy = size / 2;
+      const r = faceSize * 0.32;
+      if (!prime) {
+        arrow = `<path d="M ${cx} ${cy - r} A ${r} ${r} 0 1 0 ${cx + r} ${cy}" fill="none" stroke="${arrowColor}" stroke-width="${arrowWidth}" stroke-linecap="round"/>`;
+        arrow += `<polygon points="${cx + r},${cy} ${cx + r - 5},${cy - 7} ${cx + r + 5},${cy - 7}" fill="${arrowColor}"/>`;
+      } else {
+        arrow = `<path d="M ${cx} ${cy - r} A ${r} ${r} 0 1 1 ${cx - r} ${cy}" fill="none" stroke="${arrowColor}" stroke-width="${arrowWidth}" stroke-linecap="round"/>`;
+        arrow += `<polygon points="${cx - r},${cy} ${cx - r - 5},${cy - 7} ${cx - r + 5},${cy - 7}" fill="${arrowColor}"/>`;
+      }
+      break;
+    }
+    default:
+      break;
+  }
+
+  const labelFontSize = Math.max(10, Math.min(14, size * 0.11));
+  const label = `<text x="${size / 2}" y="${size + 1}" text-anchor="middle" font-size="${labelFontSize}" font-weight="bold" ` +
+    `font-family="Arial, sans-serif" fill="#333">${esc(friendlyName)}</text>`;
+
+  const totalHeight = size + 8;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${totalHeight}" ` +
+    `width="${size}" height="${totalHeight}" role="img">${grid}${highlight}${arrow}${label}</svg>`;
+}
