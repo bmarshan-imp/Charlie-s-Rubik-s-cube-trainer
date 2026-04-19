@@ -23,9 +23,22 @@
       </div>
       <p class="welcome-coach-text">Train with Charlie, Max Park &amp; Feliks Zemdegs!</p>
 
-      <button class="btn btn-primary btn-large" id="btn-start">
-        Let's Go!
-      </button>
+      <div class="cube-picker">
+        <p class="cube-picker-label">Which cube do you want to learn?</p>
+        <div class="cube-picker-buttons">
+          <button class="btn btn-cube-choice" id="btn-start-3x3" data-cube="3x3">
+            <span class="cube-choice-icon">🟥🟥🟥<br>🟥🟥🟥<br>🟥🟥🟥</span>
+            <span class="cube-choice-label">3×3 Cube</span>
+            <span class="cube-choice-sub">The classic — Max, Feliks &amp; Charlie</span>
+          </button>
+          <button class="btn btn-cube-choice" id="btn-start-2x2" data-cube="2x2">
+            <span class="cube-choice-icon cube-choice-icon-2x2">🟥🟥<br>🟥🟥</span>
+            <span class="cube-choice-label">2×2 Cube</span>
+            <span class="cube-choice-sub">The Pocket Cube — with Feliks</span>
+          </button>
+        </div>
+      </div>
+
       <button class="btn btn-secondary" id="btn-continue" style="display:none;">
         Continue Where I Left Off
       </button>
@@ -180,6 +193,11 @@
   <script src="js/lessons/stage7-yellow-corners.js"></script>
   <script src="js/lessons/stage8-yellow-edges.js"></script>
   <script src="js/lessons/index.js"></script>
+  <script src="js/lessons/2x2/stage1-cube-basics.js"></script>
+  <script src="js/lessons/2x2/stage2-white-face.js"></script>
+  <script src="js/lessons/2x2/stage3-yellow-face.js"></script>
+  <script src="js/lessons/2x2/stage4-finish.js"></script>
+  <script src="js/lessons/2x2/index.js"></script>
   <script src="js/app.js"></script>
 
 </body>

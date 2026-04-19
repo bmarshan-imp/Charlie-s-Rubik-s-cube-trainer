@@ -1,7 +1,7 @@
-// Lesson index — assembles all stages into a single STAGES array.
+// Lesson index — assembles 3x3 stages.
 // Stage variables are loaded via script tags before this file.
 
-const STAGES = [
+const STAGES_3X3 = [
   stage1,
   stage2,
   stage3,
@@ -11,3 +11,7 @@ const STAGES = [
   stage7,
   stage8,
 ];
+
+// `STAGES` starts pointing at the 3x3 course and is re-pointed by app.js
+// when the active cube type changes.
+let STAGES = STAGES_3X3;
