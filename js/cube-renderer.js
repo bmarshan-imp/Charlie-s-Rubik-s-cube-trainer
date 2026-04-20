@@ -27,7 +27,7 @@ const COLOR_NAMES = {
 
 // ---------------------------------------------------------------------------
 // Solved cube state (standard color scheme)
-// White top, Yellow bottom, Red front, Orange back, Green left, Blue right
+// White top, Yellow bottom, Red front, Orange back, Blue left, Green right
 // ---------------------------------------------------------------------------
 
 const SOLVED_CUBE = {
@@ -35,8 +35,8 @@ const SOLVED_CUBE = {
   D: ['Y','Y','Y','Y','Y','Y','Y','Y','Y'],
   F: ['R','R','R','R','R','R','R','R','R'],
   B: ['O','O','O','O','O','O','O','O','O'],
-  L: ['G','G','G','G','G','G','G','G','G'],
-  R: ['B','B','B','B','B','B','B','B','B'],
+  L: ['B','B','B','B','B','B','B','B','B'],
+  R: ['G','G','G','G','G','G','G','G','G'],
 };
 
 /**
@@ -502,8 +502,8 @@ const FACE_BORDER_COLORS = {
   bottom: COLORS.Y,
   front: COLORS.R,
   back: COLORS.O,
-  left: COLORS.G,
-  right: COLORS.B,
+  left: COLORS.B,
+  right: COLORS.G,
 };
 
 /**
@@ -590,8 +590,8 @@ function renderMoveArrow(move, size = 100, options = {}) {
   const topColor = options.orientation === 'yellowTop' ? COLORS.Y : COLORS.W;
   const botColor = options.orientation === 'yellowTop' ? COLORS.W : COLORS.Y;
   const FACE_INFO = {
-    R: { color: COLORS.B,  name: 'Right' },
-    L: { color: COLORS.G,  name: 'Left' },
+    R: { color: COLORS.G,  name: 'Right' },
+    L: { color: COLORS.B,  name: 'Left' },
     U: { color: topColor,  name: 'Top' },
     D: { color: botColor,  name: 'Bottom' },
     F: { color: COLORS.R,  name: 'Front' },
@@ -728,8 +728,8 @@ const SOLVED_CUBE_2X2 = {
   D: ['Y','Y','Y','Y'],
   F: ['R','R','R','R'],
   B: ['O','O','O','O'],
-  L: ['G','G','G','G'],
-  R: ['B','B','B','B'],
+  L: ['B','B','B','B'],
+  R: ['G','G','G','G'],
 };
 
 function makeState2x2(overrides = {}) {
@@ -913,8 +913,8 @@ function renderMoveArrow2x2(move, size = 110, options = {}) {
   const topColor = options.orientation === 'yellowTop' ? COLORS.Y : COLORS.W;
   const botColor = options.orientation === 'yellowTop' ? COLORS.W : COLORS.Y;
   const FACE_INFO = {
-    R: { color: COLORS.B,  name: 'Right' },
-    L: { color: COLORS.G,  name: 'Left' },
+    R: { color: COLORS.G,  name: 'Right' },
+    L: { color: COLORS.B,  name: 'Left' },
     U: { color: topColor,  name: 'Top' },
     D: { color: botColor,  name: 'Bottom' },
     F: { color: COLORS.R,  name: 'Front' },
