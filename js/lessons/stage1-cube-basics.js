@@ -56,21 +56,21 @@ const stage1 = {
         {
           diagram: {
             type: 'face',
-            colors: ['G','G','G','G','G','G','G','G','G'],
+            colors: ['B','B','B','B','B','B','B','B','B'],
             labels: ['','','','','Left','','','',''],
           },
-          text: "**Left** — the face on your left hand.\n\n[Green] is on the left.",
+          text: "**Left** — the face on your left hand.\n\n[Blue] is on the left.",
         },
         {
           diagram: {
             type: 'face',
-            colors: ['B','B','B','B','B','B','B','B','B'],
+            colors: ['G','G','G','G','G','G','G','G','G'],
             labels: ['','','','','Right','','','',''],
           },
-          text: "**Right** — the face on your right hand.\n\n[Blue] is on the right.",
+          text: "**Right** — the face on your right hand.\n\n[Green] is on the right.",
         },
         {
-          text: "**Quick memory trick:**\nHold the cube with [White] on top and [Red] facing you.\n\nNow the faces always match their colour:\n**Top** = [White], **Bottom** = [Yellow]\n**Front** = [Red], **Back** = [Orange]\n**Left** = [Green], **Right** = [Blue]",
+          text: "**Quick memory trick:**\nHold the cube with [White] on top and [Red] facing you.\n\nNow the faces always match their colour:\n**Top** = [White], **Bottom** = [Yellow]\n**Front** = [Red], **Back** = [Orange]\n**Left** = [Blue], **Right** = [Green]",
         },
       ],
       checkIn: {
@@ -140,11 +140,11 @@ const stage1 = {
       steps: [
         {
           diagram: { type: 'moveArrow', moves: ['R'], size: 130 },
-          text: "**Right — follow the arrow!**\n\nHold your cube with [White] on top and [Red] facing you.\n\nGrab the [Blue] side (your right hand) and push the top of it **away from you**.\n\nThe coloured square in the middle shows you which face to turn. The red arrow shows which way!",
+          text: "**Right — follow the arrow!**\n\nHold your cube with [White] on top and [Red] facing you.\n\nGrab the [Green] side (your right hand) and push the top of it **away from you**.\n\nThe coloured square in the middle shows you which face to turn. The red arrow shows which way!",
         },
         {
           diagram: { type: 'moveArrow', moves: ["R'"], size: 130 },
-          text: "**Right Undo — the arrow flips!**\n\nSee the little hook \u21A9 in the label? That means **go the other way**.\n\nGrab the [Blue] side again and pull the top **toward you** this time.\n\nDo {Right} then {Right \u21A9} — everything goes back! They undo each other.",
+          text: "**Right Undo — the arrow flips!**\n\nSee the little hook \u21A9 in the label? That means **go the other way**.\n\nGrab the [Green] side again and pull the top **toward you** this time.\n\nDo {Right} then {Right \u21A9} — everything goes back! They undo each other.",
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', "R'"], size: 110 },

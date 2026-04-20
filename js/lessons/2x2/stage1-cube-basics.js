@@ -55,17 +55,17 @@ const stage1_2x2 = {
       steps: [
         {
           diagram: { type: 'net', cubeSize: 2, state: 'solved' },
-          text: "A **solved 2x2** looks just like a solved 3x3 — each face is one solid colour.\n\nThe standard scheme is:\n**Top** = [White], **Bottom** = [Yellow]\n**Front** = [Red], **Back** = [Orange]\n**Left** = [Green], **Right** = [Blue]",
+          text: "A **solved 2x2** looks just like a solved 3x3 — each face is one solid colour.\n\nThe standard scheme is:\n**Top** = [White], **Bottom** = [Yellow]\n**Front** = [Red], **Back** = [Orange]\n**Left** = [Blue], **Right** = [Green]",
         },
         {
           text: "**Opposite colours:**\n\n[White] is always across from [Yellow].\n[Red] is always across from [Orange].\n[Blue] is always across from [Green].\n\nLook at any single corner — the three colours on it are always from three **different** opposite pairs!",
         },
         {
-          text: "**The white-red-blue corner** is on the front-top-right.\nThe **white-red-green corner** is on the front-top-left.\n\nEach corner has one unique combination of three colours. There are exactly **8** combinations — one for each corner slot!",
+          text: "**The white-red-green corner** is on the front-top-right.\nThe **white-red-blue corner** is on the front-top-left.\n\nEach corner has one unique combination of three colours. There are exactly **8** combinations — one for each corner slot!",
         },
       ],
       checkIn: {
-        text: "Can you find the corner that has [White], [Red], and [Blue] on it? Where on the cube should that corner live when the puzzle is solved?",
+        text: "Can you find the corner that has [White], [Red], and [Green] on it? Where on the cube should that corner live when the puzzle is solved?",
       },
       celebration: "You know the 2x2 colour map! Every corner has a home.",
     },
@@ -81,7 +81,7 @@ const stage1_2x2 = {
       steps: [
         {
           diagram: { type: 'moveArrow', cubeSize: 2, moves: ['R'], size: 130 },
-          text: "**Right** — grab the [Blue] side and push the top away from you.\n\nThe whole right side flips, just like on the big cube. Easy!",
+          text: "**Right** — grab the [Green] side and push the top away from you.\n\nThe whole right side flips, just like on the big cube. Easy!",
         },
         {
           diagram: { type: 'moveArrow', cubeSize: 2, moves: ["R'"], size: 130 },

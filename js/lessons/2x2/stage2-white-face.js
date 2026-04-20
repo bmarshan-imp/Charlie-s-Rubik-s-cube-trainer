@@ -26,20 +26,20 @@ const stage2_2x2 = {
             colors: ['R','X','X','X'],
             highlights: [0],
           },
-          text: "**Look at all 8 corners.** Four of them have a [White] sticker. Pick any one — let's use the corner with [White], [Red], and [Blue].",
+          text: "**Look at all 8 corners.** Four of them have a [White] sticker. Pick any one — let's use the corner with [White], [Red], and [Green].",
         },
         {
-          text: "**Put it in the bottom-front-right spot** with:\n\n• [White] on the bottom\n• [Red] on the front\n• [Blue] on the right\n\nYou can hold the corner in your hand and just **place the cube around it** — rotate the whole puzzle so this corner lands on the bottom-front-right.",
+          text: "**Put it in the bottom-front-right spot** with:\n\n• [White] on the bottom\n• [Red] on the front\n• [Green] on the right\n\nYou can hold the corner in your hand and just **place the cube around it** — rotate the whole puzzle so this corner lands on the bottom-front-right.",
         },
         {
-          text: "**That corner now decides the scheme.**\n\nBecause this corner sits with [White]-[Red]-[Blue], we know:\n\n• The whole bottom face = [White]\n• The whole front face = [Red]\n• The whole right face = [Blue]\n\nAnd from the opposites: Top = [Yellow], Back = [Orange], Left = [Green].",
+          text: "**That corner now decides the scheme.**\n\nBecause this corner sits with [White]-[Red]-[Green], we know:\n\n• The whole bottom face = [White]\n• The whole front face = [Red]\n• The whole right face = [Green]\n\nAnd from the opposites: Top = [Yellow], Back = [Orange], Left = [Blue].",
         },
         {
           text: "**Don't move this corner again!**\n\nIt's our anchor. Every other corner will be placed to match the faces it sits on.\n\nFrom now on, when we say 'match the front centre' on the 3x3 — on the 2x2, just **match the colour of the corner that's already there**.",
         },
       ],
       checkIn: {
-        text: "Can you place the white-red-blue corner at the bottom-front-right of your cube? Check: is [White] facing the floor?",
+        text: "Can you place the white-red-green corner at the bottom-front-right of your cube? Check: is [White] facing the floor?",
       },
       celebration: "Your anchor corner is set! The colour scheme is locked in.",
     },
@@ -57,7 +57,7 @@ const stage2_2x2 = {
           text: "**Keep [White] on the bottom.** Look at the three remaining white corners.\n\nIf any are in the **top layer** already — great, we can work on them there.\n\nIf any are in the **bottom layer but in the wrong slot** — we'll pop them up first.",
         },
         {
-          text: "**Pick one white corner in the top layer.**\n\nLook at its **two non-white colours**. Those colours must match the two bottom-layer sides where the corner wants to go.\n\nExample: a [White]-[Red]-[Green] corner belongs at bottom-front-left (between the [Red] front and the [Green] left).",
+          text: "**Pick one white corner in the top layer.**\n\nLook at its **two non-white colours**. Those colours must match the two bottom-layer sides where the corner wants to go.\n\nExample: a [White]-[Red]-[Blue] corner belongs at bottom-front-left (between the [Red] front and the [Blue] left).",
         },
         {
           text: "**Set up the corner:**\n\n1. Use {Top} turns to move the corner to the **top-front-right** position — directly above its home slot.\n2. The corner's non-white stickers should be facing the front and the right sides (not always a match yet — that's OK, you just need it above its home).",
