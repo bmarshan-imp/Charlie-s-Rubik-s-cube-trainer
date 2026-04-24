@@ -78,11 +78,11 @@ const stage3 = {
           text: "**Setup:** Flip your cube so [White] is on the **bottom** and [Yellow] is on top.\n\nFind a white corner in the **top layer**. Turn the top ({U}) to position that corner so it's at the **front-right** — directly above its home slot, with its non-white colors matching the front and right centers.",
         },
         {
-          text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces the **right** side\n2. White faces **up**\n3. White faces **toward you** (front)\n\nEach case needs a different number of triggers.",
+          text: "**Now look at where the white sticker is on that corner.**\n\nIt can be in one of three positions:\n1. White faces **toward you** (front)\n2. White faces **up**\n3. White faces the **right** side\n\nEach case needs a different number of triggers.",
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110, orientation: 'yellowTop' },
-          text: "**Case 1: White faces the right side**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner drops right into place with white on the bottom!",
+          text: "**Case 1: White faces toward you (front)**\n\nThis is the easy one! Just do the trigger once:\n\nThe corner drops right into place with white on the bottom!",
           moves: ['R', 'U', "R'", "U'"],
         },
         {
@@ -92,7 +92,7 @@ const stage3 = {
         },
         {
           diagram: { type: 'moveArrow', moves: ['R', 'U', "R'", "U'"], size: 110, orientation: 'yellowTop' },
-          text: "**Case 3: White faces toward you (front)**\n\nDo the trigger **five times!**\n\nIt takes longer, but it works perfectly!",
+          text: "**Case 3: White faces the right side**\n\nDo the trigger **five times!**\n\nIt takes longer, but it works perfectly!",
           moves: ['R', 'U', "R'", "U'", '×5'],
         },
         {

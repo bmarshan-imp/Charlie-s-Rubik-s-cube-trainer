@@ -64,7 +64,7 @@ const stage2_2x2 = {
         },
         {
           diagram: { type: 'moveArrow', cubeSize: 2, moves: ['R', 'U', "R'", "U'"], size: 110 },
-          text: "**Case 1 — White sticker faces the RIGHT side.**\n\nDo the right-hand trigger **once**:\n{Right} {Top} {Right \u21A9} {Top \u21A9}\n\nThe corner drops into the bottom with [White] on the floor. Done!",
+          text: "**Case 1 — White sticker faces the FRONT (toward you).**\n\nDo the right-hand trigger **once**:\n{Right} {Top} {Right \u21A9} {Top \u21A9}\n\nThe corner drops into the bottom with [White] on the floor. Done!",
           moves: ['R', 'U', "R'", "U'"],
         },
         {
@@ -74,7 +74,7 @@ const stage2_2x2 = {
         },
         {
           diagram: { type: 'moveArrow', cubeSize: 2, moves: ['R', 'U', "R'", "U'"], size: 110 },
-          text: "**Case 3 — White sticker faces the FRONT (toward you).**\n\nDo the right-hand trigger **five times**.\n\nIt feels long, but it's the same rhythm over and over. Count them out loud!",
+          text: "**Case 3 — White sticker faces the RIGHT side.**\n\nDo the right-hand trigger **five times**.\n\nIt feels long, but it's the same rhythm over and over. Count them out loud!",
           moves: ['R', 'U', "R'", "U'", '×5'],
         },
         {
